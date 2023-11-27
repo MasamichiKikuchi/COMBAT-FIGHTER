@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
 
+    public GameObject missilePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +30,14 @@ public class PlayerController : MonoBehaviour
         // tilt the plane up/down based on up/down arrow keys
         transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime * verticalInput);
 
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime * horizontalInput);
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime * horizontalInput * -1);
         //transform.Rotate()
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Vector3 playerPosition = transform.position;
+            Instantiate(missilePrefab);
+        }
     }
 }
 
