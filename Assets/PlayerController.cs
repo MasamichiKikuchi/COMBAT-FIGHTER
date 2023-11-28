@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject missilePrefab;
 
+    private GameObject instantiatedMissile;
+
+    public Collider tagetObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             Vector3 playerPosition = transform.position;
-            Instantiate(missilePrefab);
+            if (tagetObject != null)
+            {
+                Instantiate(missilePrefab).GetComponent<MissileController>().target = tagetObject.transform;
+            }
         }
     }
 }
