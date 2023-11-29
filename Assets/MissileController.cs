@@ -43,9 +43,9 @@ public class MissileController : MonoBehaviour
        }
     
     }
-    public void SetTarget(Collider collider)
+    public void SetTarget(GameObject lockedEnemy)
     {
-        target = collider.transform;
+        target = lockedEnemy.transform;
     }
 
 }

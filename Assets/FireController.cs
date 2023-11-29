@@ -8,7 +8,7 @@ public class FireController : MonoBehaviour
     public GameObject player;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"{other.name}");
+        
 
         player.GetComponent<PlayerController>().tagetObject = other;
        
