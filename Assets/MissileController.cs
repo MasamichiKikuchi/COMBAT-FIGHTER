@@ -33,8 +33,12 @@ public class MissileController : MonoBehaviour
        {     
             // ミサイルの移動
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            // 目標の方向を向く
-            transform.LookAt(target);
+           
+            if (target != null)
+            {
+                // 目標の方向を向く
+                transform.LookAt(target);
+            }
         }
 
        else 
