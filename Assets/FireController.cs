@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class FireController : MonoBehaviour
 {
     public GameObject missilePrefab;
 
-    private GameObject instantiatedMissile;
-
     public BoxCollider playerCollider; // プレイヤーのボックスコライダーコンポーネント
     private GameObject[] enemiesInLockOnRange; // ロックオン範囲内の敵の配列
-    private GameObject lockedEnemy; // ロックオン対象の敵
+    public GameObject lockedEnemy; // ロックオン対象の敵
     System.Collections.Generic.List<GameObject> enemies;
+    public GameObject lockOnCursor;//ロックオンカーソル
+    
+
 
     void Start()
     {
         enemies = new System.Collections.Generic.List<GameObject>();
+        
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class FireController : MonoBehaviour
            SwitchLockedEnemy();
         }
 
-        Debug.Log($"{lockedEnemy}");
+        //Debug.Log($"{lockedEnemy}");
     }
     void OnTriggerEnter(Collider other)
     {
@@ -76,6 +78,8 @@ public class FireController : MonoBehaviour
             {
                 // 現在のロックオン対象がない場合、リストの最初の要素を新しいロックオン対象に設定
                 lockedEnemy = enemies[0];
+                //ロックオンカーソルの位置を設定
+                lockOnCursor.GetComponent<LockOnCursor>().lockedEnemy = lockedEnemy;
             }
         }
     }
@@ -104,7 +108,9 @@ public class FireController : MonoBehaviour
             lockedEnemy = null;
         }
 
-       
+        //ロックオンカーソルの位置を設定
+        lockOnCursor.GetComponent<LockOnCursor>().lockedEnemy = lockedEnemy;
+
     }
 
     void SwitchLockedEnemy()
@@ -131,6 +137,8 @@ public class FireController : MonoBehaviour
             lockedEnemy = null;
         }
 
+        //ロックオンカーソルの位置を設定
+        lockOnCursor.GetComponent<LockOnCursor>().lockedEnemy = lockedEnemy;
     }
     
 }
