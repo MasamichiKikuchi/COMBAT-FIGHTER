@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
 
         // プレイヤーの移動処理
         MovePlayer();
-       
-
     }
 
     void AdjustSpeed(float scrollInput)
@@ -52,7 +50,22 @@ public class PlayerController : MonoBehaviour
 
         //飛行機のZ軸回転（ロール）
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime * horizontalInput * -1);
-        
+
+
+        //飛行機のＹ軸回転（ヨー）
+        // Qボタンが押されたら左に回転
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(Vector3.up, -1 * rotationSpeed * Time.deltaTime);
+        }
+
+        // Eボタンが押されたら右に回転
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(Vector3.up, 1 * rotationSpeed * Time.deltaTime);
+        }
     }
 }
+
+
 
