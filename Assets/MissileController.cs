@@ -17,9 +17,7 @@ public class MissileController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
-
-        transform.position = player.transform.position;
+       
         // ゲームオブジェクトの初期位置を保存
        initialPosition = transform.position;
 
