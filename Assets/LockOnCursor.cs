@@ -16,9 +16,7 @@ using UnityEngine;
 
     private void Update()
         {
-         UpdateLifeGaugePosition();
-         Debug.Log($"{lockedEnemy}");
-        
+         UpdateLifeGaugePosition();        
         }
 
         private void UpdateLifeGaugePosition()
