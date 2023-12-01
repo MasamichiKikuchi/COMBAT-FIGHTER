@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1514833964952674101}
   - component: {fileID: 852151359353845290}
   - component: {fileID: 5094603088647753616}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -118,5 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb6f92c4a8bb9f499227af499826a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   speed: 100
   maxDistance: 50

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MissileController : MonoBehaviour
 {
-    public Transform target; // ロックオンした敵
+    public GameObject target; // ロックオンした敵
     public float speed = 100f; // ミサイルの速度
 
     public float maxDistance = 100f; // 一定距離
@@ -16,11 +16,9 @@ public class MissileController : MonoBehaviour
     private GameObject player;
 
     void Start()
-    {
-       
+    {    
         // ゲームオブジェクトの初期位置を保存
        initialPosition = transform.position;
-
     }
 
     void Update()
@@ -35,7 +33,7 @@ public class MissileController : MonoBehaviour
             if (target != null)
             {
                 // 目標の方向を向く
-                transform.LookAt(target);
+                transform.LookAt(target.transform.position);
             }
         }
 
@@ -47,7 +45,17 @@ public class MissileController : MonoBehaviour
     }
     public void SetTarget(GameObject lockedEnemy)
     {
-        target = lockedEnemy.transform;
+        target = lockedEnemy;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy")) 
+        {
+            other.GetComponent<Enemy>().Damage(1);
+        
+        }
+        Destroy(gameObject);
     }
 
 }
