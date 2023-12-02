@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         if (hp <= 0)
         { 
           Destroy(gameObject);
+          FireController.enemies.Remove(gameObject);     
         }
     }
 
