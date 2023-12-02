@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 383961059}
   - component: {fileID: 383961058}
   m_Layer: 8
-  m_Name: EnemyEscapeArea
+  m_Name: EnemyAvoidArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
+  rotateSpeed: 1
 --- !u!54 &1114350236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -935,6 +936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
+  rotateSpeed: 10
 --- !u!1 &1643502402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
+  rotateSpeed: 10
 --- !u!1 &1827271042
 GameObject:
   m_ObjectHideFlags: 0
