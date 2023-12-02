@@ -7,7 +7,6 @@ using UnityEngine;
 public class EnemyFireController : MonoBehaviour
 {
     public GameObject enemyMissilePrefab;
-    public BoxCollider enemyAttackArea; //敵の攻撃範囲のボックスコライダーコンポーネント
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +17,6 @@ public class EnemyFireController : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Attack(other);
     }
 
     public void Attack(Collider collider)
