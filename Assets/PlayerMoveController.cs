@@ -33,7 +33,7 @@ public class PlayerMoveController : MonoBehaviour
         currentSpeed += scrollInput * 10f; 
 
         // ë¨ìxÇêßå¿
-        currentSpeed = Mathf.Clamp(currentSpeed, 1f, 50f); 
+        currentSpeed = Mathf.Clamp(currentSpeed, 3f, 50f); 
     }
 
     void MovePlayer()

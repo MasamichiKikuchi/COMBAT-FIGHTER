@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-   
+    public float chaseSpeed = 5f; // 基本の追跡速度
     public float flankSpeed = 5f;       // 回り込み時の速度
    
     private Transform player; // プレイヤーのTransform
 
     public float flankDistance = 5f; // 回り込む距離
     public float moveSpeed = 5f; // 移動速度
+
+    private bool isFlanking = false; // 回り込み中かどうかのフラグ
 
     protected enum StateEnum
     {
@@ -37,14 +39,37 @@ public class Enemy : MonoBehaviour
     {
         hp = maxHp;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+         
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, 0.05f);
-        ContinueFlanking();
+       // プレイヤーとの距離に基づいて敵の速度を設定
+        float playerDistance = Vector3.Distance(transform.position, player.position);
+        float speedMultiplier = Mathf.Clamp01(playerDistance / 10f); // 距離に応じて速度を変化させる
+
+        // 敵の速度を設定
+        float currentSpeed = chaseSpeed * speedMultiplier;
+
+        // プレイヤーの方向に向かって移動
+        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+       
+        // プレイヤーとの距離が一定以下の場合、回り込みを開始
+        if ((Vector3.Distance(transform.position, player.position) > flankDistance) && !isFlanking)
+        {
+            // 回り込みを開始
+            StartFlanking();
+        }
+
+        // 回り込み中の場合、目標地点に向かって移動と回転
+        if (isFlanking)
+        {
+            ContinueFlanking();
+        }
+        
+        
     }
 
     public void Damage(int damage)
@@ -76,6 +101,11 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         transform.Translate(Vector3.forward * avoidanceSpeed * Time.deltaTime);
     }
+    void StartFlanking()
+    {
+        isFlanking = true;
+    }
+
 
     void ContinueFlanking()
     {
@@ -88,7 +118,12 @@ public class Enemy : MonoBehaviour
         Vector3 directionToTarget = flankPosition - transform.position;
         Quaternion rotation = Quaternion.LookRotation(directionToTarget);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
-       
+
+        // 目標地点に到達したら回り込み終了
+        if (Vector3.Distance(transform.position, flankPosition) < 0.1f)
+        {
+            isFlanking = false;
+        }
     }
 }
 

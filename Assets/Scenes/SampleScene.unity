@@ -563,9 +563,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseSpeed: 5
+  flankSpeed: 5
+  flankDistance: 5
+  moveSpeed: 5
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
-  rotateSpeed: 1
+  rotateSpeed: 0.5
 --- !u!54 &1114350236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -808,7 +812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1525982168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -934,6 +938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseSpeed: 5
+  flankSpeed: 5
+  flankDistance: 5
+  moveSpeed: 5
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
   rotateSpeed: 10
@@ -1059,7 +1067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1709736778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1185,6 +1193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseSpeed: 5
+  flankSpeed: 5
+  flankDistance: 5
+  moveSpeed: 5
   enemyEscapeArea: {fileID: 0}
   avoidanceSpeed: 10
   rotateSpeed: 10
