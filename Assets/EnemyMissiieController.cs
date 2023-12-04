@@ -48,5 +48,15 @@ public class EnemyMissileController : MonoBehaviour
             target = collider.transform;
         }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerController>().Damage(1);
+
+        }
+        Destroy(gameObject);
+    }
+
+
 }

@@ -10,14 +10,14 @@ public class FireController : MonoBehaviour
     public BoxCollider playerCollider; // プレイヤーのボックスコライダーコンポーネント
     private GameObject[] enemiesInLockOnRange; // ロックオン範囲内の敵の配列
     public GameObject lockedEnemy; // ロックオン対象の敵
-    System.Collections.Generic.List<GameObject> enemies;
+    public static List<GameObject> enemies;
     public GameObject lockOnCursor;//ロックオンカーソル
     
 
 
     void Start()
     {
-        enemies = new System.Collections.Generic.List<GameObject>();
+        enemies = new List<GameObject>();
         
     }
 
@@ -84,7 +84,7 @@ public class FireController : MonoBehaviour
         }
     }
 
-    void RemoveEnemiesInLockOnRange(Collider collider)
+    public void RemoveEnemiesInLockOnRange(Collider collider)
     {
         if (lockedEnemy == collider)
         {
@@ -128,6 +128,13 @@ public class FireController : MonoBehaviour
 
                 // 次の要素を新しい lockedEnemy に設定
                 lockedEnemy = enemies[nextIndex];
+            }
+            // 現在のlockedEnemy が存在しない場合
+            else
+            {
+                //ロックオン範囲内に敵がいる場合、最初の要素を新しいロックオン対象に設定
+                lockedEnemy = enemies[0];
+
             }
          
         }

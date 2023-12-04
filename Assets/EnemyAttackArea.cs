@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class EnemyAttackArea : MonoBehaviour
 {
+    public GameObject emeny;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        emeny.GetComponent<EnemyFireController>().Attack(other);
     }
 }
