@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+   
+    public float flankSpeed = 5f;       // 回り込み時の速度
+   
+    private Transform player; // プレイヤーのTransform
+
+    public float flankDistance = 5f; // 回り込む距離
+    public float moveSpeed = 5f; // 移動速度
+
     protected enum StateEnum
     {
         Normal,
@@ -28,13 +36,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         hp = maxHp;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, 0.1f); 
-
+        transform.Translate(0, 0, 0.05f);
+        ContinueFlanking();
     }
 
     public void Damage(int damage)
@@ -67,5 +77,19 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.forward * avoidanceSpeed * Time.deltaTime);
     }
 
+    void ContinueFlanking()
+    {
+        // プレイヤーの後ろに回り込む目標地点を計算
+        Vector3 flankDirection =  player.forward - transform.position;
+        Vector3 flankPosition = player.position + flankDirection.normalized * flankDistance;
 
+      
+        // 目標地点の方向を向く
+        Vector3 directionToTarget = flankPosition - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(directionToTarget);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
+       
+    }
 }
+
+
