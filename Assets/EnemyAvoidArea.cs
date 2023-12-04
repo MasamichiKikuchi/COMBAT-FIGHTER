@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject enemy;
     Enemy _enemy;
     // Start is called before the first frame update
+    Vector3 randomDirection;
     void Start()
     {
         _enemy = enemy.GetComponent<Enemy>();
@@ -18,9 +19,16 @@ public class NewBehaviourScript : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+       randomDirection =_enemy.GetComponent<Enemy>().AvoidDirection();
+      
+    }
+
     private void OnTriggerStay(Collider other)
     {
-       _enemy.AvoidMove(other);
+
+        _enemy.AvoidMove(other, randomDirection);
     }
 
 }
