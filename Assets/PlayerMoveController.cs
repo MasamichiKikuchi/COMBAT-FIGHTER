@@ -10,6 +10,14 @@ public class PlayerMoveController : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
 
+    //ˆÚ“®‰Â”\”ÍˆÍ‚Ìİ’è
+    public float minX = -500f;
+    public float maxX = 500f;
+    public float minY = 1f;
+    public float maxY = 100f;
+    public float minZ = -500f;
+    public float maxZ = 500f;
+
     void Start()
     {
         currentSpeed = speed;
@@ -64,8 +72,16 @@ public class PlayerMoveController : MonoBehaviour
         {
             transform.Rotate(Vector3.up, 1 * rotationSpeed * Time.deltaTime);
         }
+
+        // ˆÊ’u‚ğ§ŒÀ
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
+        float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
+        transform.position = new Vector3(clampedX, clampedY, clampedZ);
+
     }
 }
+
 
 
 

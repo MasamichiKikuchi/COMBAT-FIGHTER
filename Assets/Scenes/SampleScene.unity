@@ -563,6 +563,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minX: -500
+  maxX: 500
+  minY: 1
+  maxY: 100
+  minZ: -500
+  maxZ: 500
   chaseSpeed: 5
   flankSpeed: 5
   flankDistance: 5
@@ -737,6 +743,12 @@ MonoBehaviour:
   rotationSpeed: 50
   verticalInput: 50
   horizontalInput: 50
+  minX: -500
+  maxX: 500
+  minY: 0
+  maxY: 300
+  minZ: -500
+  maxZ: 500
 --- !u!54 &1400622488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -759,7 +771,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -938,6 +950,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minX: -500
+  maxX: 500
+  minY: 1
+  maxY: 100
+  minZ: -500
+  maxZ: 500
   chaseSpeed: 5
   flankSpeed: 5
   flankDistance: 5
@@ -1193,6 +1211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minX: -500
+  maxX: 500
+  minY: 1
+  maxY: 100
+  minZ: -500
+  maxZ: 500
   chaseSpeed: 5
   flankSpeed: 5
   flankDistance: 5
