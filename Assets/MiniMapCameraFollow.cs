@@ -7,6 +7,8 @@ public class MiniMapCameraFollow : MonoBehaviour
     public Transform playerTransform;
     public float heightAbovePlayer = 100f;
 
+   
+
     void LateUpdate()
     {
         // プレイヤーの位置に追随する

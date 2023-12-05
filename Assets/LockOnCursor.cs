@@ -32,7 +32,7 @@ using UnityEngine;
         {
             Vector3 screenPoint = Camera.main.WorldToScreenPoint(playerTransform.position);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRectTransform, screenPoint, null, out Vector2 localPoint);
-            transform.localPosition = localPoint + new Vector2(0,100);
+            transform.localPosition = localPoint + new Vector2(0,80);
         }
         }
     }
