@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     int hp;
     int maxHp =1;
    
-    public BoxCollider enemyEscapeArea; //プレイヤーを感知したら回避行動をとる範囲のボックスコライダーコンポーネント
+    public BoxCollider enemyAvoidArea; //プレイヤーを感知したら回避行動をとる範囲のボックスコライダーコンポーネント
     public float avoidanceSpeed = 200f;    // 回避行動時の速度
     private Vector3 avoidanceDirection; // 回避行動の方向
     public float rotateSpeed = 0.01f;

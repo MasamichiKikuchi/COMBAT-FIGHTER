@@ -52,7 +52,7 @@ public class EnemyMissileController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().Damage(1);
+            other.GetComponent<Player>().Damage(1);
 
         }
         Destroy(gameObject);
