@@ -11,7 +11,6 @@ public class EnemyMissileController : MonoBehaviour
 
         private Vector3 initialPosition;
 
-        private GameObject enemy;
 
         void Start()
         {

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class MiniMap : MonoBehaviour
 {
-    public Camera miniMapCamera;
-    public RawImage miniMapImage;
+    public Camera miniMapCamera;//ミニマップ用のカメラ
+    public RawImage miniMapImage;//ミニマップを表示するイメージ
     RenderTexture renderTexture;
     public GameObject playerIconPrefab;  // プレイヤーアイコンのPrefab
     public GameObject enemyIconPrefab;   // 敵アイコンのPrefab
