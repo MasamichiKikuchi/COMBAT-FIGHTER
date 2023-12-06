@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ public class MiniMap : MonoBehaviour
     private Image playerIcon;            // プレイヤーアイコン
     private Dictionary<Transform, Image> enemyIcons; // 各敵に対応するアイコン
 
+    public RectTransform miniMapRect;  // ミニマップのRectTransform（Inspectorで設定）
     void Start()
     {
         renderTexture = new RenderTexture(miniMapCamera.pixelWidth, miniMapCamera.pixelHeight, 24);
@@ -26,7 +28,7 @@ public class MiniMap : MonoBehaviour
         enemyIcons = new Dictionary<Transform, Image>();
     }
 
-    void LateUpdate()
+    void Update()
     {
         Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
         RenderTexture.active = renderTexture;
@@ -59,8 +61,40 @@ public class MiniMap : MonoBehaviour
             // 敵アイコンの表示位置を更新
             Image enemyIcon = GetEnemyIcon(enemy);
             enemyIcon.rectTransform.anchoredPosition = new Vector2(enemyPos.x * miniMapImage.rectTransform.rect.width, enemyPos.y * miniMapImage.rectTransform.rect.height);
+            
+            if (IsInMiniMapBounds(enemyIcon.rectTransform.anchoredPosition))
+            {
+                // ミニマップの範囲内にいる場合、アイコンを表示するか再表示する
+                SetIconVisibility(enemy, true);
+            }
+
+            else 
+            {
+                // ミニマップの範囲外にいる場合、アイコンを非表示にする
+                SetIconVisibility(enemy, false);
+                //continue; // 次の敵に進む
+            }
+        }
+
+       
+    }
+
+    bool IsInMiniMapBounds(Vector2 mapPosition)
+    {
+        // ミニマップの範囲を判定する処理
+        return mapPosition.x >= 0 && mapPosition.x <= miniMapRect.rect.width
+            && mapPosition.y >= 0 && mapPosition.y <= miniMapRect.rect.height;
+    }
+
+    void SetIconVisibility(Transform enemyTransform, bool isVisible)
+    {
+        // アイコンの表示・非表示を切り替える処理
+        if (enemyIcons.TryGetValue(enemyTransform, out Image enemyIcon))
+        {
+            enemyIcon.gameObject.SetActive(isVisible);
         }
     }
+   
 
     Image GetEnemyIcon(Transform enemy)
     {
@@ -69,6 +103,7 @@ public class MiniMap : MonoBehaviour
         {
             GameObject enemyIcon = Instantiate(enemyIconPrefab, enemyIconsParent);
             enemyIcons[enemy] = enemyIcon.GetComponent<Image>();
+            
         }
 
         return enemyIcons[enemy];
