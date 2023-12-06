@@ -23,7 +23,7 @@ public class MiniMap : MonoBehaviour
         miniMapCamera.targetTexture = renderTexture;
 
         playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();
-        //enemyIcons = new Dictionary<Transform, Image>();
+        enemyIcons = new Dictionary<Transform, Image>();
     }
 
     void LateUpdate()
@@ -37,7 +37,7 @@ public class MiniMap : MonoBehaviour
         miniMapImage.texture = texture2D;
 
         UpdatePlayerIcon();
-        //UpdateEnemyIcons();
+        UpdateEnemyIcons();
     }
     
     void UpdatePlayerIcon()
