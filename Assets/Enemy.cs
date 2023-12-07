@@ -100,6 +100,7 @@ public class Enemy : MonoBehaviour
             FireController.enemies.Remove(gameObject);
             MiniMap.enemies.Remove(gameObject);
             miniMap.RemoveEnemyIcon(gameObject);
+            Score.Instance.AddScore(100);
             Destroy(gameObject);
         }
     }
