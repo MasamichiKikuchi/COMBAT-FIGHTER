@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         {
             while (true)
             {
-                var distanceVector = new Vector3(20, 0, 0);
+                var distanceVector = new Vector3(100, 0, 0);
 
                 var spawnPositionFromPlayer = Quaternion.Euler(0, Random.Range(0, 360f), 0) * distanceVector;
 

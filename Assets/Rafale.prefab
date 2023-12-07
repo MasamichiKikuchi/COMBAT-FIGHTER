@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa363dd12099b748bf63eee4b699178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emeny: {fileID: 7404388441596196507}
+  enemy: {fileID: 7404388441596196507}
 --- !u!1 &4710894336979514137
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +953,7 @@ MonoBehaviour:
   flankSpeed: 10
   flankDistance: 5
   moveSpeed: 15
-  enemyAvoidArea: {fileID: 0}
+  enemyAvoidArea: {fileID: 430399645129237269}
   avoidanceSpeed: 25
   rotateSpeed: 0.2
 --- !u!114 &4833922136532465313

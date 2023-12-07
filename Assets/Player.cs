@@ -31,4 +31,10 @@ public class Player : MonoBehaviour
             Debug.Log("ゲームオーバー");        
         }
     }
+
+    public void Waning()
+    {
+        Debug.Log("敵に狙われている！");
+    
+    }
 }
