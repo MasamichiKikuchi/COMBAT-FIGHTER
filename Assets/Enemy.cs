@@ -43,12 +43,14 @@ public class Enemy : MonoBehaviour
     private Vector3 avoidanceDirection; // ‰ñ”ğs“®‚Ì•ûŒü
     public float rotateSpeed = 0.01f;
 
+   
+
     // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-         
+        MiniMap.enemies.Add(gameObject);
     }
 
 
@@ -91,9 +93,10 @@ public class Enemy : MonoBehaviour
         hp -= damage;
 
         if (hp <= 0)
-        { 
-          Destroy(gameObject);
-          FireController.enemies.Remove(gameObject);     
+        {        
+            FireController.enemies.Remove(gameObject);
+            MiniMap.enemies.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 

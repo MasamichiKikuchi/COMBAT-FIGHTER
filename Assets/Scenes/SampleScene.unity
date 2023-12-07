@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,7 +176,6 @@ MonoBehaviour:
   playerIconPrefab: {fileID: 7797416899544918952, guid: 54a8df183d6324645900c7f743846fa2, type: 3}
   enemyIconPrefab: {fileID: 6611630303360733735, guid: dbf697ebb688fe64ebe235bcbd1cb879, type: 3}
   playerTransform: {fileID: 1445146900}
-  enemyParent: {fileID: 1203485487}
   enemyIconsParent: {fileID: 670708391}
   miniMapRect: {fileID: 229647252}
 --- !u!114 &229647254
@@ -928,7 +927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1525982168
 BoxCollider:
   m_ObjectHideFlags: 0

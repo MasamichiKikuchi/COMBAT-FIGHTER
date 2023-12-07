@@ -12,7 +12,7 @@ public class MiniMap : MonoBehaviour
     public GameObject playerIconPrefab;  // プレイヤーアイコンのPrefab
     public GameObject enemyIconPrefab;   // 敵アイコンのPrefab
     public Transform playerTransform;    // プレイヤーのTransform
-    public Transform enemyParent;        // 敵の親オブジェクト
+    public static List<GameObject> enemies;
     public Transform enemyIconsParent;   // 敵アイコンを配置する親オブジェクト
 
     private Image playerIcon;            // プレイヤーアイコン
@@ -26,6 +26,7 @@ public class MiniMap : MonoBehaviour
 
         playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();
         enemyIcons = new Dictionary<Transform, Image>();
+        enemies = new List<GameObject>();
     }
 
     void Update()
@@ -53,27 +54,34 @@ public class MiniMap : MonoBehaviour
 
     void UpdateEnemyIcons()
     {
-        foreach (Transform enemy in enemyParent.transform)
+        foreach (GameObject enemy in enemies)
         {
-            Vector3 enemyPos = miniMapCamera.WorldToViewportPoint(enemy.position);
+            Vector3 enemyPos = miniMapCamera.WorldToViewportPoint(enemy.transform.position);
             enemyPos.z = 0f;  // ミニマップ上での深度を0に設定
 
             // 敵アイコンの表示位置を更新
-            Image enemyIcon = GetEnemyIcon(enemy);
+            Image enemyIcon = GetEnemyIcon(enemy.transform);
             enemyIcon.rectTransform.anchoredPosition = new Vector2(enemyPos.x * miniMapImage.rectTransform.rect.width, enemyPos.y * miniMapImage.rectTransform.rect.height);
-            
+
+            if (enemy == null)
+            {
+                Destroy(enemyIcon);
+            }
+
             if (IsInMiniMapBounds(enemyIcon.rectTransform.anchoredPosition))
             {
                 // ミニマップの範囲内にいる場合、アイコンを表示するか再表示する
-                SetIconVisibility(enemy, true);
+                SetIconVisibility(enemy.transform, true);
             }
 
             else 
             {
                 // ミニマップの範囲外にいる場合、アイコンを非表示にする
-                SetIconVisibility(enemy, false);
+                SetIconVisibility(enemy.transform, false);
                 //continue; // 次の敵に進む
             }
+
+           
         }
 
        
