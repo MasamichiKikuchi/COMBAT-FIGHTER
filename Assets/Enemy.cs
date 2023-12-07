@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     private bool isFlanking = false; // 回り込み中かどうかのフラグ
 
+   
     protected enum StateEnum
     {
         Normal,
@@ -42,8 +44,8 @@ public class Enemy : MonoBehaviour
     public float avoidanceSpeed = 200f;    // 回避行動時の速度
     private Vector3 avoidanceDirection; // 回避行動の方向
     public float rotateSpeed = 0.01f;
+    private MiniMap miniMap;
 
-   
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class Enemy : MonoBehaviour
         hp = maxHp;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         MiniMap.enemies.Add(gameObject);
+        miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
     }
 
 
@@ -96,6 +99,7 @@ public class Enemy : MonoBehaviour
         {        
             FireController.enemies.Remove(gameObject);
             MiniMap.enemies.Remove(gameObject);
+            miniMap.RemoveEnemyIcon(gameObject);
             Destroy(gameObject);
         }
     }
