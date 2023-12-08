@@ -21,13 +21,18 @@ public class EnemyAttackArea : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        other.GetComponent<Player>().lookedON = true;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (coroutine == false)
         {
             StartCoroutine(EnemyAttackLoop(other));
         }
-        other.GetComponent<Player>().Waning();
+       
     }
 
     private IEnumerator EnemyAttackLoop(Collider other)
@@ -39,5 +44,10 @@ public class EnemyAttackArea : MonoBehaviour
         enemyFireController.Attack(other);
 
         coroutine = false;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.GetComponent<Player>().lookedON = false;
     }
 }

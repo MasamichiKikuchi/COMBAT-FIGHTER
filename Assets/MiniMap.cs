@@ -13,12 +13,10 @@ public class MiniMap : MonoBehaviour
     public GameObject enemyIconPrefab;   // 敵アイコンのPrefab
     public Transform playerTransform;    // プレイヤーのTransform
     public static List<GameObject> enemies;
-    public static List<GameObject> destroyedEnemies;
     public Transform enemyIconsParent;   // 敵アイコンを配置する親オブジェクト
 
     private Image playerIcon;            // プレイヤーアイコン
     private Dictionary<Transform, Image> enemyIcons; // 各敵に対応するアイコン
-    
 
     public RectTransform miniMapRect;  // ミニマップのRectTransform（Inspectorで設定）
     void Start()
@@ -29,8 +27,6 @@ public class MiniMap : MonoBehaviour
         playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();
         enemyIcons = new Dictionary<Transform, Image>();
         enemies = new List<GameObject>();
-        // 削除された敵のリスト
-        destroyedEnemies = new List<GameObject>();
     }
 
     void Update()
@@ -57,8 +53,7 @@ public class MiniMap : MonoBehaviour
     }
 
     void UpdateEnemyIcons()
-    {          
-        
+    {
         foreach (GameObject enemy in enemies)
         {
             Vector3 enemyPos = miniMapCamera.WorldToViewportPoint(enemy.transform.position);
@@ -72,18 +67,19 @@ public class MiniMap : MonoBehaviour
             {
                 // ミニマップの範囲内にいる場合、アイコンを表示するか再表示する
                 SetIconVisibility(enemy.transform, true);
-                continue; // 次の敵に進む
             }
 
             else 
             {
                 // ミニマップの範囲外にいる場合、アイコンを非表示にする
                 SetIconVisibility(enemy.transform, false);
-                continue; // 次の敵に進む
+                //continue; // 次の敵に進む
             }
-         
+
+           
         }
 
+       
     }
 
     bool IsInMiniMapBounds(Vector2 mapPosition)
@@ -118,12 +114,10 @@ public class MiniMap : MonoBehaviour
 
     public void RemoveEnemyIcon(GameObject enemy)
     {
-        // アイコンが存在するか確認し、存在する場合は削除
         if (enemyIcons.TryGetValue(enemy.transform, out Image enemyIcon))
         {
             Destroy(enemyIcon.gameObject);
-            enemyIcons.Remove(enemy.transform);
-            destroyedEnemies.Remove(enemy);
+            enemyIcons.Remove(enemy.transform);           
         }
     }
 
