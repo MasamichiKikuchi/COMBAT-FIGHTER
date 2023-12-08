@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
     {
         hp = maxHp;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //MiniMap.enemies.Add(gameObject);
+        MiniMap.enemies.Add(gameObject);
         miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
     }
 

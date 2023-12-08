@@ -19,14 +19,17 @@ public class MiniMap : MonoBehaviour
     private Dictionary<Transform, Image> enemyIcons; // 各敵に対応するアイコン
 
     public RectTransform miniMapRect;  // ミニマップのRectTransform（Inspectorで設定）
-    void Start()
+
+    private void Awake()
     {
         renderTexture = new RenderTexture(miniMapCamera.pixelWidth, miniMapCamera.pixelHeight, 24);
-        miniMapCamera.targetTexture = renderTexture;
-
-        playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();
         enemyIcons = new Dictionary<Transform, Image>();
         enemies = new List<GameObject>();
+    }
+    void Start()
+    {   
+        miniMapCamera.targetTexture = renderTexture;
+        playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();   
     }
 
     void Update()
@@ -74,12 +77,8 @@ public class MiniMap : MonoBehaviour
                 // ミニマップの範囲外にいる場合、アイコンを非表示にする
                 SetIconVisibility(enemy.transform, false);
                 //continue; // 次の敵に進む
-            }
-
-           
-        }
-
-       
+            }        
+        }    
     }
 
     bool IsInMiniMapBounds(Vector2 mapPosition)
