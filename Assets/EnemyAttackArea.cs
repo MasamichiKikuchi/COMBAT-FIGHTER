@@ -9,26 +9,20 @@ public class EnemyAttackArea : MonoBehaviour
     EnemyFireController enemyFireController;
 
     bool coroutine = false;
+
+    public bool lockPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
        enemyFireController = enemy.GetComponent<EnemyFireController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        other.GetComponent<Player>().lookedON = true;
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (coroutine == false)
+        lockPlayer = true;
+        enemyFireController.attacking = true;
+
+        if (coroutine == false&&enemyFireController.attacking==true)
         {
             StartCoroutine(EnemyAttackLoop(other));
         }
@@ -40,14 +34,16 @@ public class EnemyAttackArea : MonoBehaviour
         coroutine = true;
 
         yield return new WaitForSeconds(3.0f);
-
-        enemyFireController.Attack(other);
-
+        if (enemyFireController.attacking == true)
+        {
+            enemyFireController.Attack(other);
+        }
         coroutine = false;
     }
 
     private void OnTriggerExit(Collider other)
-    {
-        other.GetComponent<Player>().lookedON = false;
+    {    
+        enemyFireController.attacking = false;
+        lockPlayer = false;
     }
 }
