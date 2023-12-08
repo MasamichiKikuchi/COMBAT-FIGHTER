@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,28 +11,29 @@ public class Player : MonoBehaviour
     int maxHp = 10;
     public GameObject lifeGauge;
     public GameObject lookOnArert;
-    public bool lookedON = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
 
-        lookOnArert.SetActive(false);
-       
+        lookOnArert.SetActive(false);    
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        if (lookedON == true)
+    {      
+        var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
+
+        lookOnArert.SetActive(false);
+        
+        foreach (var enemy in enemys)
         {
-            Waning();
+            if (enemy.lockPlayer == true)
+            {
+                lookOnArert.SetActive(true);
+                break;
+            }      
         }
-        else
-        {
-            lookOnArert.SetActive(false);
-        }
+        
     }
 
     public void Damage(int damage) 
@@ -45,8 +47,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Waning()
+    private void OnTriggerStay(Collider other)
+    {        
+      Waning();
+    }
+   
+
+    private void OnTriggerExit(Collider other)
     {
+        if (other.tag == "EnemyAttackArea")
+        {
+           
+            lookOnArert.SetActive(false);
+        }
+    }
+    public void Waning()
+    {  
        Debug.Log("ìGÇ…ë_ÇÌÇÍÇƒÇ¢ÇÈÅI");
        lookOnArert.SetActive(true);
     }

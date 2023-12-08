@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 4250555981621342453}
   m_Layer: 8
   m_Name: EnemyAttackArea
-  m_TagString: Untagged
+  m_TagString: EnemyAttackArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -968,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d4ce47e1af2aa4ab6683916db359d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacking: 0
   enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
 --- !u!54 &8932465504882806526
 Rigidbody:
