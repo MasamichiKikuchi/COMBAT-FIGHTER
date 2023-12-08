@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7404388441596196507}
+  lockPlayer: 0
 --- !u!1 &4710894336979514137
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,8 +535,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 15, z: 20}
-  m_Center: {x: 0, y: 1, z: -13}
+  m_Size: {x: 30, y: 30, z: 30}
+  m_Center: {x: 0, y: 1, z: -11}
 --- !u!114 &2415116263262558951
 MonoBehaviour:
   m_ObjectHideFlags: 0
