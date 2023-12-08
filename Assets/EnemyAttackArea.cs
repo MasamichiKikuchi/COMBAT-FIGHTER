@@ -24,11 +24,12 @@ public class EnemyAttackArea : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         other.GetComponent<Player>().lookedON = true;
+        enemyFireController.attacking = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (coroutine == false)
+        if (coroutine == false&&enemyFireController.attacking==true)
         {
             StartCoroutine(EnemyAttackLoop(other));
         }
@@ -40,14 +41,16 @@ public class EnemyAttackArea : MonoBehaviour
         coroutine = true;
 
         yield return new WaitForSeconds(3.0f);
-
-        enemyFireController.Attack(other);
-
+        if (enemyFireController.attacking == true)
+        {
+            enemyFireController.Attack(other);
+        }
         coroutine = false;
     }
 
     private void OnTriggerExit(Collider other)
-    {
+    {    
         other.GetComponent<Player>().lookedON = false;
+        enemyFireController.attacking = false;
     }
 }
