@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
         // 敵の速度を設定
         float currentSpeed = chaseSpeed * speedMultiplier;
 
-        // プレイヤーの方向に向かって移動
+        // 前方に向かって移動
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
        
         // プレイヤーとの距離が一定以下の場合、回り込みを開始
@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
 
         // 目標地点に到達したら回り込み終了
-        if (Vector3.Distance(transform.position, flankPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, flankPosition) < 10f)
         {
             isFlanking = false;
         }

@@ -384,8 +384,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 20}
-  m_Center: {x: 0, y: 0, z: 13}
+  m_Size: {x: 5, y: 5, z: 30}
+  m_Center: {x: 0, y: 0, z: 17}
 --- !u!114 &4250555981621342453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,13 +950,13 @@ MonoBehaviour:
   maxY: 100
   minZ: -500
   maxZ: 500
-  chaseSpeed: 10
-  flankSpeed: 10
-  flankDistance: 5
-  moveSpeed: 15
+  chaseSpeed: 30
+  flankSpeed: 50
+  flankDistance: 15
+  moveSpeed: 50
   enemyAvoidArea: {fileID: 430399645129237269}
-  avoidanceSpeed: 25
-  rotateSpeed: 0.2
+  avoidanceSpeed: 20
+  rotateSpeed: 1.5
 --- !u!114 &4833922136532465313
 MonoBehaviour:
   m_ObjectHideFlags: 0
