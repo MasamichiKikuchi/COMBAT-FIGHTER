@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     public float chaseSpeed = 5f; // 基本の追跡速度
     public float flankSpeed = 5f;       // 回り込み時の速度
    
-    private Transform player; // プレイヤーのTransform
+    private GameObject player; // プレイヤーのTransform
 
     public float flankDistance = 5f; // 回り込む距離
     public float moveSpeed = 5f; // 移動速度
@@ -46,14 +46,14 @@ public class Enemy : MonoBehaviour
     public float rotateSpeed = 0.01f;
     private MiniMap miniMap;
 
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         hp = maxHp;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
         MiniMap.enemies.Add(gameObject);
         miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
+        
     }
 
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
        // プレイヤーとの距離に基づいて敵の速度を設定
-        float playerDistance = Vector3.Distance(transform.position, player.position);
+        float playerDistance = Vector3.Distance(transform.position, player.transform.position);
         float speedMultiplier = Mathf.Clamp01(playerDistance / 10f); // 距離に応じて速度を変化させる
 
         // 敵の速度を設定
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
        
         // プレイヤーとの距離が一定以下の場合、回り込みを開始
-        if ((Vector3.Distance(transform.position, player.position) > flankDistance) && !isFlanking)
+        if ((Vector3.Distance(transform.position, player.transform.position) > flankDistance) && !isFlanking)
         {
             // 回り込みを開始
             StartFlanking();
@@ -101,6 +101,7 @@ public class Enemy : MonoBehaviour
             MiniMap.enemies.Remove(gameObject);
             miniMap.RemoveEnemyIcon(gameObject);
             Score.Instance.AddScore(100);
+            player.GetComponent<Player>().ShootingDown();
             Destroy(gameObject);
         }
     }
@@ -132,8 +133,8 @@ public class Enemy : MonoBehaviour
     void ContinueFlanking()
     {
         // プレイヤーの後ろに回り込む目標地点を計算
-        Vector3 flankDirection =  player.forward - transform.position;
-        Vector3 flankPosition = player.position + flankDirection.normalized * flankDistance;
+        Vector3 flankDirection =  player.transform.forward - transform.position;
+        Vector3 flankPosition = player.transform.position + flankDirection.normalized * flankDistance;
 
       
         // 目標地点の方向を向く

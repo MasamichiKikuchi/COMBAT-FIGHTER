@@ -12,8 +12,6 @@ public class FireController : MonoBehaviour
     public GameObject lockedEnemy; // ロックオン対象の敵
     public static List<GameObject> enemies;
     public GameObject lockOnCursor;//ロックオンカーソル
-    
-
 
     void Start()
     {
@@ -28,10 +26,7 @@ public class FireController : MonoBehaviour
             Vector3 playerPosition = transform.position;
 
             FireMissile();
-            //if (tagetObject != null)
-            // {
-            // Instantiate(missilePrefab).GetComponent<MissileController>().target = tagetObject.transform;
-            // }
+           
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -39,12 +34,10 @@ public class FireController : MonoBehaviour
            SwitchLockedEnemy();
         }
 
-        //Debug.Log($"{lockedEnemy}");
     }
     void OnTriggerEnter(Collider other)
     {
-        GetEnemiesInLockOnRange(other);
-       
+        GetEnemiesInLockOnRange(other);  
     }
 
     private void OnTriggerExit(Collider other)

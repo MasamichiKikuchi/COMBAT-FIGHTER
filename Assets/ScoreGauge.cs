@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreGauge : MonoBehaviour
 {
-    public Text scoreGauge;
+    public TextMeshProUGUI scoreGauge;
 
     private void Start()
     {
-        scoreGauge = GetComponent<Text>();
+        scoreGauge = GetComponent<TextMeshProUGUI>();
     }
 
 
     void Update()
     {
-        scoreGauge.text = ($"{Score.Instance.playerScore}");
+        scoreGauge.text = $"SCORE:{Score.Instance.playerScore}";
 
 
     }

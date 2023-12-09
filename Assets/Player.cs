@@ -11,12 +11,15 @@ public class Player : MonoBehaviour
     int maxHp = 10;
     public GameObject lifeGauge;
     public GameObject lookOnArert;
+    public GameObject shootingDownDirection;
+    bool coroutine = false;
 
     void Start()
     {
         hp = maxHp;
 
-        lookOnArert.SetActive(false);    
+        lookOnArert.SetActive(false);  
+        shootingDownDirection.SetActive(false);
     }
 
     void Update()
@@ -65,5 +68,25 @@ public class Player : MonoBehaviour
     {  
        Debug.Log("ìGÇ…ë_ÇÌÇÍÇƒÇ¢ÇÈÅI");
        lookOnArert.SetActive(true);
+    }
+
+    public void ShootingDown()
+    {
+        if (coroutine != true)
+        {
+            StartCoroutine(ShootingDownDirectionCoroutine());
+        }
+    }
+
+    private IEnumerator ShootingDownDirectionCoroutine()
+    {
+        coroutine = true;
+
+        shootingDownDirection.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        shootingDownDirection.SetActive(false);
+
+        coroutine = false;
+
     }
 }
