@@ -16,7 +16,7 @@ public class ScoreGauge : MonoBehaviour
 
     void Update()
     {
-        scoreGauge.text = ($"{Score.Instance.playerScore}");
+        scoreGauge.text = $"SCORE:{Score.Instance.playerScore}";
 
 
     }
