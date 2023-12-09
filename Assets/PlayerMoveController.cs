@@ -10,6 +10,7 @@ public class PlayerMoveController : MonoBehaviour
     public float rotationSpeed;
     public float verticalInput;
     public float horizontalInput;
+    public int currentAltitude;
 
     //ˆÚ“®‰Â”\”ÍˆÍ‚Ìİ’è
     public float minX = -500f;
@@ -20,10 +21,12 @@ public class PlayerMoveController : MonoBehaviour
     public float maxZ = 500f;
 
     public TextMeshProUGUI speedMeter;
+    public TextMeshProUGUI altiMeter;
 
     void Start()
     {
         currentSpeed = speed;
+       
     }
 
     void Update()
@@ -38,6 +41,8 @@ public class PlayerMoveController : MonoBehaviour
         MovePlayer();
 
         speedMeter.text = $"SPEED:{currentSpeed}";
+        currentAltitude = (int)gameObject.transform.position.y;
+        altiMeter.text = $"ALT:{currentAltitude}";
     }
 
     void AdjustSpeed(float scrollInput)
