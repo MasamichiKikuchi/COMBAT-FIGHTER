@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMoveController : MonoBehaviour
@@ -18,6 +19,8 @@ public class PlayerMoveController : MonoBehaviour
     public float minZ = -500f;
     public float maxZ = 500f;
 
+    public TextMeshProUGUI speedMeter;
+
     void Start()
     {
         currentSpeed = speed;
@@ -33,6 +36,8 @@ public class PlayerMoveController : MonoBehaviour
 
         // プレイヤーの移動処理
         MovePlayer();
+
+        speedMeter.text = $"SPEED:{currentSpeed}";
     }
 
     void AdjustSpeed(float scrollInput)
@@ -41,7 +46,7 @@ public class PlayerMoveController : MonoBehaviour
         currentSpeed += scrollInput * 10f; 
 
         // 速度を制限
-        currentSpeed = Mathf.Clamp(currentSpeed, 3f, 50f); 
+        currentSpeed = Mathf.Clamp(currentSpeed, 5f, 100f); 
     }
 
     void MovePlayer()

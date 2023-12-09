@@ -946,7 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -500
   maxX: 500
-  minY: 1
+  minY: 10
   maxY: 100
   minZ: -500
   maxZ: 500
