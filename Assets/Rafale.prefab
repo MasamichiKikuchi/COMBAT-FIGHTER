@@ -349,7 +349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2339943926311077640
 Transform:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 30}
+  m_Size: {x: 10, y: 10, z: 30}
   m_Center: {x: 0, y: 0, z: 17}
 --- !u!114 &4250555981621342453
 MonoBehaviour:
@@ -500,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &430229487771686690
 Transform:
   m_ObjectHideFlags: 0
@@ -952,11 +952,18 @@ MonoBehaviour:
   maxZ: 500
   chaseSpeed: 30
   flankSpeed: 50
-  flankDistance: 15
+  flankDistance: 50
   moveSpeed: 50
+  followDistance: 20
+  followSpeed: 40
+  attacking: 0
+  enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
   enemyAvoidArea: {fileID: 430399645129237269}
   avoidanceSpeed: 20
-  rotateSpeed: 1.5
+  rotateSpeed: 1.2
+  tiltAmount: 20
+  smoothDampTime: 0.1
+  currentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &4833922136532465313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,7 +971,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7404388441596196507}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6d4ce47e1af2aa4ab6683916db359d4, type: 3}
   m_Name: 

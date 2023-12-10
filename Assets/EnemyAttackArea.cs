@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyAttackArea : MonoBehaviour
 {
     public GameObject enemy;
-    EnemyFireController enemyFireController;
+    Enemy _enemy;
 
     bool coroutine = false;
 
@@ -14,15 +14,15 @@ public class EnemyAttackArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       enemyFireController = enemy.GetComponent<EnemyFireController>();
+       _enemy = enemy.GetComponent<Enemy>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         lockPlayer = true;
-        enemyFireController.attacking = true;
+        _enemy.attacking = true;
 
-        if (coroutine == false&&enemyFireController.attacking==true)
+        if (coroutine == false&&_enemy.attacking==true)
         {
             StartCoroutine(EnemyAttackLoop(other));
         }
@@ -34,16 +34,16 @@ public class EnemyAttackArea : MonoBehaviour
         coroutine = true;
 
         yield return new WaitForSeconds(3.0f);
-        if (enemyFireController.attacking == true)
+        if (_enemy.attacking == true)
         {
-            enemyFireController.Attack(other);
+            _enemy.Attack(other);
         }
         coroutine = false;
     }
 
     private void OnTriggerExit(Collider other)
     {    
-        enemyFireController.attacking = false;
+        _enemy.attacking = false;
         lockPlayer = false;
     }
 }
