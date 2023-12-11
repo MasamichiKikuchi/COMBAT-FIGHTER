@@ -72,33 +72,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-         //前方に向かって移動
-        // transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
-
-        //プレイヤーとの距離が一定以下の場合、回り込みを開始
-        if ((Vector3.Distance(transform.position, player.transform.position) > flankDistance) && !isFlanking)
-        {
-         //回り込みを開始
-        StartFlanking();
-        }
-
-        // 回り込み中の場合、目標地点に向かって移動と回転
-        if (isFlanking)
-        {
-        ContinueFlanking();
-        }
-        if (isFollowing) 
-        {
-         FollowPlayer();
-        }
-
-        if (isAttacking)
-        {
-            AttackMove();
-        }
-
+         FollowPlayer();    
+        
+        AttackMove();
+       
         // 位置を制限
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
         float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
@@ -122,16 +99,7 @@ public class Enemy : MonoBehaviour
         Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * followSpeed);
-        /*
-        // プレイヤーとの距離に基づいて敵の速度を設定
-        float playerDistance = Vector3.Distance(transform.position, player.transform.position);
-        float speedMultiplier = Mathf.Clamp01(playerDistance / 1f); // 距離に応じて速度を変化させる
-
-        // 敵の速度を設定
-        float currentSpeed = chaseSpeed * speedMultiplier;
-        // プレイヤーに向かって移動
-        transform.position += transform.forward * currentSpeed * Time.deltaTime;
-        */
+      
         // プレイヤーの位置にオフセットを加えて滑らかに移動
         float offsetDistance = 10f;
         Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
@@ -171,44 +139,10 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         transform.Translate(Vector3.forward * avoidanceSpeed * Time.deltaTime);
     }
-    void StartFlanking()
-    {
-        isFlanking = true;
-    }
 
-
-    void ContinueFlanking()
-    {
-
-        // プレイヤーの後ろに回り込む目標地点を計算
-        Vector3 flankDirection = player.transform.forward - transform.position;
-        Vector3 flankPosition = player.transform.position + flankDirection.normalized * flankDistance;
-
-
-        // 目標地点の方向を向く
-        Vector3 directionToTarget = flankPosition - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(directionToTarget);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
-        transform.Translate(Vector3.forward * flankSpeed * Time.deltaTime);
-        // 目標地点に到達したら回り込み終了
-        if (Vector3.Distance(transform.position, flankPosition) < 30f)
-        {
-            isFlanking = false;
-            isFollowing= true;
-
-        }
-    }
     void FollowPlayer()
     {
-        /*
-        // プレイヤーの位置にオフセットを加えて滑らかに移動
-        float offsetDistance = 100f;
-        Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
-        Quaternion rotation = Quaternion.LookRotation(targetPosition);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        */
-
+        transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
         // プレイヤーの位置に向かって滑らかに移動
         float offsetDistance = 10f;
         Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance; ;
@@ -222,6 +156,7 @@ public class Enemy : MonoBehaviour
         // 傾きを追加
         float tiltZ = -directionToPlayer.x * tiltAmount;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+
     }
 }
 
