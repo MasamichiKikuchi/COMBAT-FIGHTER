@@ -78,26 +78,26 @@ public class Enemy : MonoBehaviour
         // transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
 
         //プレイヤーとの距離が一定以下の場合、回り込みを開始
-        if ((Vector3.Distance(transform.position, player.transform.position) > flankDistance) && !isFlanking)
-        {
+        //if ((Vector3.Distance(transform.position, player.transform.position) > flankDistance) && !isFlanking)
+       // {
          //回り込みを開始
-        StartFlanking();
-        }
+       // StartFlanking();
+        //}
 
         // 回り込み中の場合、目標地点に向かって移動と回転
-        if (isFlanking)
-        {
-        ContinueFlanking();
-        }
-        if (isFollowing) 
-        {
+       // if (isFlanking)
+       // {
+       // ContinueFlanking();
+       // }
+       // if (isFollowing) 
+       // {
          FollowPlayer();
-        }
+        //}
 
-        if (isAttacking)
-        {
+        //if (isAttacking)
+        //{
             AttackMove();
-        }
+        //}
 
         // 位置を制限
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
@@ -208,7 +208,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         */
-
+        transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
         // プレイヤーの位置に向かって滑らかに移動
         float offsetDistance = 10f;
         Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance; ;
@@ -222,6 +222,14 @@ public class Enemy : MonoBehaviour
         // 傾きを追加
         float tiltZ = -directionToPlayer.x * tiltAmount;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+
+        /*if (Vector3.Distance(transform.position, targetPosition) > 50f)
+        {
+            isFollowing = false;
+            isFlanking = true;
+
+        }
+        */
     }
 }
 
