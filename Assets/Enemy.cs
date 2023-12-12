@@ -41,8 +41,8 @@ public class Enemy : MonoBehaviour
     public float smoothDampTime = 0.1f; // 滑らかな動きを得るための時間
     private Vector3 currentVelocity;
     public GameObject particlePrefab; // プレハブをアタッチするための変数
-
-
+    public AudioClip damageSE;
+   
     protected enum StateEnum
     {
         Normal,
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         MiniMap.enemies.Add(gameObject);
         miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
-       
+     
     }
 
 
@@ -113,6 +113,7 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0)
         {
+            AudioSource.PlayClipAtPoint(damageSE ,gameObject.transform.position);
             FireController.enemies.Remove(gameObject);
             MiniMap.enemies.Remove(gameObject);
             miniMap.RemoveEnemyIcon(gameObject);
@@ -168,7 +169,7 @@ public class Enemy : MonoBehaviour
             particleInstance.transform.parent = transform;
             // パーティクル再生
             particleInstance.GetComponent<ParticleSystem>().Play();
-
+          
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         

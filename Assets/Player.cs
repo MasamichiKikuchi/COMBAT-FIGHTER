@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
     public GameObject damagePanel;
     bool coroutine = false;
 
-    public GameObject particlePrefab; 
+    public GameObject particlePrefab;
+
+    AudioSource audioSource;
 
     void Start()
     {
@@ -24,6 +26,14 @@ public class Player : MonoBehaviour
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
+
+      //AudioSource コンポーネントを追加
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.loop = true;
+
+        // 音の再生を開始
+        audioSource.Play();
 
     }
   
