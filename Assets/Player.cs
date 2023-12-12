@@ -22,8 +22,17 @@ public class Player : MonoBehaviour
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
-    }
 
+        // プレハブをインスタンス化してゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
+    }
+    public GameObject particlePrefab; // プレハブをアタッチするための変数
+
+    
     void Update()
     {      
         var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
