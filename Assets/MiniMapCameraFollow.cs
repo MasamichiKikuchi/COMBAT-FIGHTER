@@ -9,7 +9,7 @@ public class MiniMapCameraFollow : MonoBehaviour
 
    
 
-    void LateUpdate()
+    void Update()
     {
         // プレイヤーの位置に追随する
         transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + heightAbovePlayer, playerTransform.position.z);

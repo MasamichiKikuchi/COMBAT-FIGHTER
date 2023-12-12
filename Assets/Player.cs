@@ -12,12 +12,14 @@ public class Player : MonoBehaviour
     public GameObject lifeGauge;
     public GameObject lookOnArert;
     public GameObject shootingDownDirection;
+    public GameObject uiPanel;
+    public GameObject damagePanel;
     bool coroutine = false;
 
     void Start()
     {
         hp = maxHp;
-
+        damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
     }
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour
     {
         hp -= damage;
         lifeGauge.GetComponent<Image>().fillAmount = (hp * 1.0f) / maxHp;
+        uiPanel.GetComponent<UIVibration>().StartUIVibration();
+        StartCoroutine(DamagePanelCoroutine());
         Debug.Log($"ÉvÉåÉCÉÑÅ[ÇÃHP:{hp}");
         if (hp <= 0) 
         {
@@ -88,5 +92,12 @@ public class Player : MonoBehaviour
 
         coroutine = false;
 
+    }
+
+    private IEnumerator DamagePanelCoroutine() 
+    {
+        damagePanel.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        damagePanel.SetActive(false);
     }
 }
