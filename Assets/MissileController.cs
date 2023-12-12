@@ -13,7 +13,7 @@ public class MissileController : MonoBehaviour
 
     private Vector3 initialPosition;
 
-    private GameObject player;
+    public GameObject particlePrefab; // パーティクルシステムのプレハブをアタッチするための変数
 
     void Start()
     {    
@@ -38,8 +38,8 @@ public class MissileController : MonoBehaviour
         }
 
        else 
-       { 
-            Destroy(gameObject); 
+       {
+            StartCoroutine(DestroyCoroutine());
        }
     
     }
@@ -53,9 +53,27 @@ public class MissileController : MonoBehaviour
         if (other.CompareTag("Enemy")) 
         {
             other.GetComponent<Enemy>().Damage(1);
-        
+            Destroy(gameObject);
         }
+        else
+        {
+            StartCoroutine(DestroyCoroutine());
+        }
+       
+    }
+    IEnumerator DestroyCoroutine()
+    {
+        // プレハブをインスタンス化してゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
+
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+
+
     }
 
 }

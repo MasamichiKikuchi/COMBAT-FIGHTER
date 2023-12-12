@@ -4925,6 +4925,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 100
   maxDistance: 100
+  particlePrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
 --- !u!1 &5849878177526958477
 GameObject:
   m_ObjectHideFlags: 0

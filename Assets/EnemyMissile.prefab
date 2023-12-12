@@ -9751,6 +9751,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 100
   maxDistance: 100
+  particlePrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
 --- !u!54 &8109699176717908686
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public GameObject damagePanel;
     bool coroutine = false;
 
+    public GameObject particlePrefab; 
+
     void Start()
     {
         hp = maxHp;
@@ -23,15 +25,8 @@ public class Player : MonoBehaviour
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
 
-        // プレハブをインスタンス化してゲームオブジェクトに追加
-        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
-        particleInstance.transform.parent = transform;
-        // パーティクル再生
-        particleInstance.GetComponent<ParticleSystem>().Play();
     }
-    public GameObject particlePrefab; // プレハブをアタッチするための変数
-
+  
     
     void Update()
     {      
@@ -56,6 +51,8 @@ public class Player : MonoBehaviour
         lifeGauge.GetComponent<Image>().fillAmount = (hp * 1.0f) / maxHp;
         uiPanel.GetComponent<UIVibration>().StartUIVibration();
         StartCoroutine(DamagePanelCoroutine());
+        StartCoroutine(DamageEffectCoroutine());
+
         Debug.Log($"プレイヤーのHP:{hp}");
         if (hp <= 0) 
         {
@@ -72,14 +69,12 @@ public class Player : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "EnemyAttackArea")
-        {
-           
+        {          
             lookOnArert.SetActive(false);
         }
     }
     public void Waning()
     {  
-       Debug.Log("敵に狙われている！");
        lookOnArert.SetActive(true);
     }
 
@@ -109,4 +104,18 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         damagePanel.SetActive(false);
     }
+
+    private IEnumerator DamageEffectCoroutine()
+    {
+        // プレハブをインスタンス化してゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
+        yield return new WaitForSeconds(2f);
+        Destroy(particleInstance);
+
+    }    
+       
 }

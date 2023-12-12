@@ -1522,7 +1522,7 @@ MonoBehaviour:
   shootingDownDirection: {fileID: 1343498627}
   uiPanel: {fileID: 767268081}
   damagePanel: {fileID: 1203329115}
-  particlePrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
+  particlePrefab: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
 --- !u!114 &1445146903
 MonoBehaviour:
   m_ObjectHideFlags: 0
