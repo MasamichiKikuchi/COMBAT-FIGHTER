@@ -249,8 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniMapCamera: {fileID: 2073049072}
   miniMapImage: {fileID: 229647254}
-  playerIconPrefab: {fileID: 7797416899544918952, guid: 54a8df183d6324645900c7f743846fa2, type: 3}
-  enemyIconPrefab: {fileID: 6611630303360733735, guid: dbf697ebb688fe64ebe235bcbd1cb879, type: 3}
+  playerIconPrefab: {fileID: 5302017481834810641, guid: 04ec433cfa6b65448a768a910d424787, type: 3}
+  enemyIconPrefab: {fileID: 3300733530890872570, guid: 3a76da01c5bfd4448a8033bebf307afa, type: 3}
   playerTransform: {fileID: 1445146900}
   enemyIconsParent: {fileID: 670708391}
   miniMapRect: {fileID: 229647252}
@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1445146900}
-  heightAbovePlayer: 300
+  heightAbovePlayer: 200
 --- !u!81 &2073049071
 AudioListener:
   m_ObjectHideFlags: 0

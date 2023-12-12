@@ -8,17 +8,6 @@ public class EnemyFireController : MonoBehaviour
 {
     public bool attacking = false;
     public GameObject enemyMissilePrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Attack(Collider collider)
     {

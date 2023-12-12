@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class MiniMap : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class MiniMap : MonoBehaviour
     private Dictionary<Transform, Image> enemyIcons; // 各敵に対応するアイコン
 
     public RectTransform miniMapRect;  // ミニマップのRectTransform（Inspectorで設定）
+
+    private Quaternion objectRotation;
 
     private void Awake()
     {
@@ -43,7 +46,8 @@ public class MiniMap : MonoBehaviour
         miniMapImage.texture = texture2D;
 
         UpdatePlayerIcon();
-        UpdateEnemyIcons();
+        UpdateEnemyIcons();    
+
     }
     
     void UpdatePlayerIcon()
@@ -61,7 +65,7 @@ public class MiniMap : MonoBehaviour
         {
             Vector3 enemyPos = miniMapCamera.WorldToViewportPoint(enemy.transform.position);
             enemyPos.z = 0f;  // ミニマップ上での深度を0に設定
-
+            var enemyforward = enemyPos;;
             // 敵アイコンの表示位置を更新
             Image enemyIcon = GetEnemyIcon(enemy.transform);
             enemyIcon.rectTransform.anchoredPosition = new Vector2(enemyPos.x * miniMapImage.rectTransform.rect.width, enemyPos.y * miniMapImage.rectTransform.rect.height);
@@ -77,8 +81,18 @@ public class MiniMap : MonoBehaviour
                 // ミニマップの範囲外にいる場合、アイコンを非表示にする
                 SetIconVisibility(enemy.transform, false);
                 //continue; // 次の敵に進む
-            }        
-        }    
+            }
+
+            Quaternion worldRotation = enemy.transform.rotation;
+            Matrix4x4 inverseTransformMatrix = miniMapCamera.transform.worldToLocalMatrix;
+            Vector3 localForward = inverseTransformMatrix.MultiplyVector(worldRotation * Vector3.forward);
+            float iconRotationAngle = Mathf.Atan2(localForward.x, localForward.z) * Mathf.Rad2Deg;
+            enemyIcon.rectTransform.localEulerAngles = new Vector3(0f, 0f, -iconRotationAngle);
+
+           
+        }
+
+        
     }
 
     bool IsInMiniMapBounds(Vector2 mapPosition)
@@ -118,6 +132,11 @@ public class MiniMap : MonoBehaviour
             Destroy(enemyIcon.gameObject);
             enemyIcons.Remove(enemy.transform);           
         }
+    }
+
+    void UpdateMiniMapIcon()
+    {
+        
     }
 
 }
