@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
         public GameObject lockedEnemy;
         public TextMeshProUGUI meshPro;
         public AudioSource lockOnAudioSource;
-   
+        bool playingSound = false;
     void Start ()
     {
         meshPro.text = "<color=yellow>[ ] </color>";
@@ -26,8 +26,12 @@ using UnityEngine.UIElements;
     private void UpdateLockOnCursorPosition()
     {         
        if (lockedEnemy != null)
-       { 
-           lockOnAudioSource.Play();
+       {
+            if (playingSound != true)
+            {
+                playingSound = true;
+                lockOnAudioSource.Play();
+            }
            string text = "   [  ]";
            meshPro.text = $"<color=red>{text} </color><color=red><size=50%><align=right>LOCK</color></size></align>";
            Vector3 screenPoint = Camera.main.WorldToScreenPoint(lockedEnemy.transform.position);
@@ -37,6 +41,7 @@ using UnityEngine.UIElements;
        
        else
        {
+            playingSound =false;
            meshPro.text = "<color=green>[  ]</color>";
            Vector3 screenPoint = Camera.main.WorldToScreenPoint(playerTransform.position);
            RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRectTransform, screenPoint, null, out Vector2 localPoint);
