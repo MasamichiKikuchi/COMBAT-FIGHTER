@@ -50,9 +50,6 @@ public class Player : MonoBehaviour
                 if (playingSound != true)
                 {
                     playingSound = true;
-                    Debug.Log($"{playingSound == false}");
-                    Debug.Log($"{playingSound}");
-                    Debug.Log(" âπÇÃçƒê∂ÇäJén");
                     waningAudioSource.loop = true;
                     waningAudioSource.Play();
                 }

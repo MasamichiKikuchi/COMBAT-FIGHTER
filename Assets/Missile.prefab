@@ -4863,7 +4863,7 @@ GameObject:
   - component: {fileID: 1217929873529333187}
   - component: {fileID: -6286326209709292249}
   - component: {fileID: 2858704364242114041}
-  - component: {fileID: 7622048219681647182}
+  - component: {fileID: -8330111230175916311}
   m_Layer: 9
   m_Name: Missile
   m_TagString: Untagged
@@ -4929,7 +4929,7 @@ MonoBehaviour:
   maxDistance: 100
   particlePrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   missileAudioSource: {fileID: 2858704364242114041}
-  missileDestroyAudioSourece: {fileID: 7622048219681647182}
+  missileDestroyAudioSource: {fileID: -8330111230175916311}
 --- !u!82 &2858704364242114041
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4948,7 +4948,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 127
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -5026,7 +5026,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &7622048219681647182
+--- !u!82 &-8330111230175916311
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5036,7 +5036,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bbaeab0bdb07bb448954fb0bf6e7401c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8f7eef36ce3e26f43b3d9a2ca09b8432, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5044,12 +5044,12 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 256
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 0
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5058,13 +5058,13 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 1
-      value: 0.99640274
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -5103,7 +5103,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.0042801
       inSlope: 0
       outSlope: 0
       tangentMode: 0
