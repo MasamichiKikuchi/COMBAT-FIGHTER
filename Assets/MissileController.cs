@@ -15,10 +15,13 @@ public class MissileController : MonoBehaviour
 
     public GameObject particlePrefab; // パーティクルシステムのプレハブをアタッチするための変数
 
+    public AudioSource missileAudioSource;//発射の音声
+    public AudioSource missileDestroyAudioSourece;//破壊時の音声
     void Start()
     {    
         // ゲームオブジェクトの初期位置を保存
        initialPosition = transform.position;
+       missileAudioSource.Play();
     }
 
     void Update()
@@ -59,17 +62,17 @@ public class MissileController : MonoBehaviour
         {
             StartCoroutine(DestroyCoroutine());
         }
-       
+        //破壊時の音声再生
+        missileDestroyAudioSourece.Play();
     }
     IEnumerator DestroyCoroutine()
     {
         // プレハブをインスタンス化してゲームオブジェクトに追加
         GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
         particleInstance.transform.parent = transform;
         // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
-
+       
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
 

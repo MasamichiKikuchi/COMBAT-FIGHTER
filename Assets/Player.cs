@@ -18,7 +18,12 @@ public class Player : MonoBehaviour
 
     public GameObject particlePrefab;
 
-    AudioSource audioSource;
+   
+    public AudioSource damageAudioSource;
+    public AudioSource waningAudioSource;
+
+
+    bool playingSound = false;
 
     void Start()
     {
@@ -27,33 +32,44 @@ public class Player : MonoBehaviour
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
 
-      //AudioSource コンポーネントを追加
-        audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.loop = true;
-
-        // 音の再生を開始
-        audioSource.Play();
-
     }
-  
-    
+
+
     void Update()
-    {      
+    {
+       
         var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
 
         lookOnArert.SetActive(false);
-        
+          
         foreach (var enemy in enemys)
         {
             if (enemy.lockPlayer == true)
             {
                 lookOnArert.SetActive(true);
+                if (playingSound != true)
+                {
+                    playingSound = true;
+                    Debug.Log($"{playingSound == false}");
+                    Debug.Log($"{playingSound}");
+                    Debug.Log(" 音の再生を開始");
+                    waningAudioSource.loop = true;
+                    waningAudioSource.Play();
+                }
+
                 break;
-            }      
+            }
+            else
+            { 
+                
+              waningAudioSource.Stop();
+              playingSound=false;
+            }
+            
         }
         
     }
+   
 
     public void Damage(int damage) 
     {
@@ -62,7 +78,11 @@ public class Player : MonoBehaviour
         uiPanel.GetComponent<UIVibration>().StartUIVibration();
         StartCoroutine(DamagePanelCoroutine());
         StartCoroutine(DamageEffectCoroutine());
+        damageAudioSource.Play();
+        
 
+        // 音の再生を開始
+            
         Debug.Log($"プレイヤーのHP:{hp}");
         if (hp <= 0) 
         {
@@ -73,19 +93,24 @@ public class Player : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {        
       Waning();
+        
     }
    
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "EnemyAttackArea")
-        {          
-            lookOnArert.SetActive(false);
+        {
+           lookOnArert.SetActive(false);
+          
         }
     }
     public void Waning()
     {  
        lookOnArert.SetActive(true);
+
+       
+
     }
 
     public void ShootingDown()
