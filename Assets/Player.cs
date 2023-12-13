@@ -16,30 +16,57 @@ public class Player : MonoBehaviour
     public GameObject damagePanel;
     bool coroutine = false;
 
+    public GameObject particlePrefab;
+
+   
+    public AudioSource damageAudioSource;
+    public AudioSource waningAudioSource;
+
+
+    bool playingSound = false;
+
     void Start()
     {
         hp = maxHp;
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
+
     }
 
+
     void Update()
-    {      
+    {
+       
         var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
 
         lookOnArert.SetActive(false);
-        
+          
         foreach (var enemy in enemys)
         {
             if (enemy.lockPlayer == true)
             {
                 lookOnArert.SetActive(true);
+                if (playingSound != true)
+                {
+                    playingSound = true;
+                    waningAudioSource.loop = true;
+                    waningAudioSource.Play();
+                }
+
                 break;
-            }      
+            }
+            else
+            { 
+                
+              waningAudioSource.Stop();
+              playingSound=false;
+            }
+            
         }
         
     }
+   
 
     public void Damage(int damage) 
     {
@@ -47,6 +74,12 @@ public class Player : MonoBehaviour
         lifeGauge.GetComponent<Image>().fillAmount = (hp * 1.0f) / maxHp;
         uiPanel.GetComponent<UIVibration>().StartUIVibration();
         StartCoroutine(DamagePanelCoroutine());
+        StartCoroutine(DamageEffectCoroutine());
+        damageAudioSource.Play();
+        
+
+        // 音の再生を開始
+            
         Debug.Log($"プレイヤーのHP:{hp}");
         if (hp <= 0) 
         {
@@ -57,6 +90,7 @@ public class Player : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {        
       Waning();
+        
     }
    
 
@@ -64,14 +98,16 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "EnemyAttackArea")
         {
-           
-            lookOnArert.SetActive(false);
+           lookOnArert.SetActive(false);
+          
         }
     }
     public void Waning()
     {  
-       Debug.Log("敵に狙われている！");
        lookOnArert.SetActive(true);
+
+       
+
     }
 
     public void ShootingDown()
@@ -100,4 +136,18 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         damagePanel.SetActive(false);
     }
+
+    private IEnumerator DamageEffectCoroutine()
+    {
+        // プレハブをインスタンス化してゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
+        yield return new WaitForSeconds(2f);
+        Destroy(particleInstance);
+
+    }    
+       
 }

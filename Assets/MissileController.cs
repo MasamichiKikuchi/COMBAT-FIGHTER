@@ -13,12 +13,18 @@ public class MissileController : MonoBehaviour
 
     private Vector3 initialPosition;
 
-    private GameObject player;
+    public GameObject particlePrefab; // パーティクルシステムのプレハブをアタッチするための変数
 
+    public AudioSource missileAudioSource;//発射の音声
+    public AudioSource missileDestroyAudioSource;//破壊時の音声
+
+    private bool coroutine = false;
     void Start()
-    {    
+    {
         // ゲームオブジェクトの初期位置を保存
-       initialPosition = transform.position;
+        initialPosition = transform.position;
+        missileAudioSource.Play();
+       
     }
 
     void Update()
@@ -38,8 +44,11 @@ public class MissileController : MonoBehaviour
         }
 
        else 
-       { 
-            Destroy(gameObject); 
+       {
+            if (coroutine != true)
+            {
+                StartCoroutine(DestroyCoroutine());
+            }
        }
     
     }
@@ -53,8 +62,29 @@ public class MissileController : MonoBehaviour
         if (other.CompareTag("Enemy")) 
         {
             other.GetComponent<Enemy>().Damage(1);
-        
+            Destroy(gameObject);
         }
+        else
+        {
+            if (coroutine != true)
+            {
+                StartCoroutine(DestroyCoroutine());
+            }
+        }
+       
+       
+    }
+    IEnumerator DestroyCoroutine()
+    {
+        coroutine = true;
+        missileDestroyAudioSource.Play();
+        // プレハブをインスタンス化してゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
+       
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 

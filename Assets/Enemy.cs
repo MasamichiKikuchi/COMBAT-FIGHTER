@@ -40,8 +40,9 @@ public class Enemy : MonoBehaviour
     public float tiltAmount = 20f;      // 傾きの量
     public float smoothDampTime = 0.1f; // 滑らかな動きを得るための時間
     private Vector3 currentVelocity;
-
-
+    public GameObject particlePrefab; // プレハブをアタッチするための変数
+    public AudioSource damageAudioSource;
+   
     protected enum StateEnum
     {
         Normal,
@@ -65,7 +66,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         MiniMap.enemies.Add(gameObject);
         miniMap = GameObject.Find("MiniMap").GetComponent<MiniMap>();
-       
+     
     }
 
 
@@ -112,13 +113,14 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0)
         {
+            damageAudioSource.Play();
             FireController.enemies.Remove(gameObject);
             MiniMap.enemies.Remove(gameObject);
             miniMap.RemoveEnemyIcon(gameObject);
             Score.Instance.AddScore(100);
             player.GetComponent<Player>().ShootingDown();
-            Destroy(gameObject);
-        }
+            StartCoroutine(DestroyCoroutine());
+        }  
     }
 
     public Vector3 AvoidDirection()
@@ -156,6 +158,21 @@ public class Enemy : MonoBehaviour
         // 傾きを追加
         float tiltZ = -directionToPlayer.x * tiltAmount;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+
+    }
+
+    IEnumerator DestroyCoroutine()
+    {
+            // プレハブをインスタンス化してゲームオブジェクトに追加
+            GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+            // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
+            particleInstance.transform.parent = transform;
+            // パーティクル再生
+            particleInstance.GetComponent<ParticleSystem>().Play();
+          
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+        
 
     }
 }

@@ -24,12 +24,12 @@ public class FireController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Vector3 playerPosition = transform.position;
-
+            
             FireMissile();
            
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire2"))
         {
            SwitchLockedEnemy();
         }
