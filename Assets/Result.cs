@@ -10,10 +10,20 @@ public class Result : MonoBehaviour
     public TextMeshProUGUI totalScoreText;
     public TextMeshProUGUI rankText;
     private int lifeBonus;
-    private int totalScore;
-    private string rank;
+    public int totalScore;
+    public string rank;
 
+    // シングルトンインスタンス
+    private static Result _instance;
 
+    // インスタンスにアクセスするプロパティ
+    public static Result Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +33,11 @@ public class Result : MonoBehaviour
         ShowTotalScore(lifeBonus);
         ShowRank(totalScore);
         Debug.Log($"{Player.Instance.hp}");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (_instance == null)
+        {
+            _instance = this;
+        }
     }
 
     void ShowResultScore()
@@ -53,25 +62,29 @@ public class Result : MonoBehaviour
 
     void ShowRank(int totalScore)
     {
-        if (totalScore >= 2000)
+        if (totalScore >= 5000)
         {
             rank = "S";
         }
-        else if (totalScore >= 1500)
+        else if (totalScore >= 4000)
         {
             rank = "A";
         }
-        else if (totalScore >= 1000)
+        else if (totalScore >= 3000)
         {
             rank = "B";
         }
-        else if (totalScore >= 500)
-        { 
+        else if (totalScore >= 2000)
+        {
             rank = "C";
         }
-        else
+        else if (totalScore >= 1000)
         {
             rank = "D";
+        }
+        else
+        { 
+            rank= "E";
         }
 
         rankText.text = ($"RACK:{rank}");
