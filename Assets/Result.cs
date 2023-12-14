@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Result : MonoBehaviour
+public class ResultManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI lifeBonusText;
@@ -53,25 +53,29 @@ public class Result : MonoBehaviour
 
     void ShowRank(int totalScore)
     {
-        if (totalScore >= 2000)
+        if (totalScore >= 5000)
         {
             rank = "S";
         }
-        else if (totalScore >= 1500)
+        else if (totalScore >= 4000)
         {
             rank = "A";
         }
-        else if (totalScore >= 1000)
+        else if (totalScore >= 3000)
         {
             rank = "B";
         }
-        else if (totalScore >= 500)
-        { 
+        else if (totalScore >= 2000)
+        {
             rank = "C";
         }
-        else
+        else if (totalScore >= 1000)
         {
             rank = "D";
+        }
+        else
+        { 
+            rank= "E";
         }
 
         rankText.text = ($"RACK:{rank}");
