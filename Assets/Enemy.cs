@@ -111,14 +111,26 @@ public class Enemy : MonoBehaviour
     {
         hp -= damage;
 
+        //自分が倒された時
         if (hp <= 0)
         {
+            //プレイヤーにロックオンされないようにタグ変更
+            gameObject.tag = "Untagged";
+            //効果音ON
             damageAudioSource.Play();
-            FireController.enemies.Remove(gameObject);
+            if (FireController.lockedEnemy == gameObject)
+            {
+                player.GetComponent<FireController>().RemoveEnemiesInLockOnRange(gameObject);
+            }
+           //ミニマップのリストから除去
             MiniMap.enemies.Remove(gameObject);
+            //ミニマップのアイコンを除去
             miniMap.RemoveEnemyIcon(gameObject);
+            //スコア加算
             Score.Instance.AddScore(100);
+            //撃墜の演出ON
             player.GetComponent<Player>().ShootingDown();
+            //破壊時のコルーチンON
             StartCoroutine(DestroyCoroutine());
         }  
     }
@@ -160,20 +172,18 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
 
     }
-
+    //破壊時のコルーチン
     IEnumerator DestroyCoroutine()
     {
-            // プレハブをインスタンス化してゲームオブジェクトに追加
-            GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-            // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
-            particleInstance.transform.parent = transform;
-            // パーティクル再生
-            particleInstance.GetComponent<ParticleSystem>().Play();
+        // パーティクルプレハブを作り、ゲームオブジェクトに追加
+        GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        particleInstance.transform.parent = transform;
+        // パーティクル再生
+        particleInstance.GetComponent<ParticleSystem>().Play();
           
-            yield return new WaitForSeconds(1f);
-            Destroy(gameObject);
-        
-
+      　yield return new WaitForSeconds(0.5f);
+        //自分を破壊
+        Destroy(gameObject);
     }
 }
 
