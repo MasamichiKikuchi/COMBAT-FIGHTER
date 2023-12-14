@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    int hp;
+    public int hp;
     int maxHp = 10;
     public GameObject lifeGauge;
     public GameObject lookOnArert;
@@ -22,11 +23,24 @@ public class Player : MonoBehaviour
     public AudioSource damageAudioSource;
     public AudioSource waningAudioSource;
 
-
     bool playingSound = false;
+    private static Player _instance;
+
+    public static Player Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
     void Start()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         hp = maxHp;
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
@@ -36,8 +50,7 @@ public class Player : MonoBehaviour
 
 
     void Update()
-    {
-       
+    {    
         var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
 
         lookOnArert.SetActive(false);
@@ -64,7 +77,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        
+        Debug.Log($"{Player.Instance.hp}");
     }
    
 
@@ -83,7 +96,8 @@ public class Player : MonoBehaviour
         Debug.Log($"プレイヤーのHP:{hp}");
         if (hp <= 0) 
         {
-            Debug.Log("ゲームオーバー");        
+            SceneManager.LoadScene("ResultScene");
+            
         }
     }
 

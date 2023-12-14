@@ -32,7 +32,7 @@ public class FireController : MonoBehaviour
         {
            SwitchLockedEnemy();
         }
-        Debug.Log($"{lockedEnemy}");
+       
     }
     void OnTriggerEnter(Collider other)
     {
