@@ -9,7 +9,7 @@ public class FireController : MonoBehaviour
 
     public BoxCollider playerCollider; // プレイヤーのボックスコライダーコンポーネント
     private GameObject[] enemiesInLockOnRange; // ロックオン範囲内の敵の配列
-    public GameObject lockedEnemy; // ロックオン対象の敵
+    public static GameObject lockedEnemy; // ロックオン対象の敵
     public static List<GameObject> enemies;
     public GameObject lockOnCursor;//ロックオンカーソル
 
@@ -25,24 +25,23 @@ public class FireController : MonoBehaviour
         {
             Vector3 playerPosition = transform.position;
             
-            FireMissile();
-           
+            FireMissile();  
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
            SwitchLockedEnemy();
         }
-
+        Debug.Log($"{lockedEnemy}");
     }
     void OnTriggerEnter(Collider other)
     {
-        GetEnemiesInLockOnRange(other);  
+        GetEnemiesInLockOnRange(other.gameObject);  
     }
 
     private void OnTriggerExit(Collider other)
     {
-        RemoveEnemiesInLockOnRange(other);
+        RemoveEnemiesInLockOnRange(other.gameObject);
     }
     void FireMissile()
     {
@@ -60,12 +59,12 @@ public class FireController : MonoBehaviour
 
     }
 
-    void GetEnemiesInLockOnRange(Collider collider)
+    void GetEnemiesInLockOnRange(GameObject gameObject)
     {
-        if (collider.CompareTag("Enemy"))
+        if (gameObject.CompareTag("Enemy"))
         {
             // ロックオン範囲内に入った敵をリストに追加
-            enemies.Add(collider.gameObject);
+            enemies.Add(gameObject);
 
             if (lockedEnemy == null)
             {
@@ -77,16 +76,16 @@ public class FireController : MonoBehaviour
         }
     }
 
-    public void RemoveEnemiesInLockOnRange(Collider collider)
+    public void RemoveEnemiesInLockOnRange(GameObject gameObject)
     {
-        if (lockedEnemy == collider)
+        if (lockedEnemy == gameObject)
         {
             // ロックオンしてる敵が範囲内からでた場合、ロックオン対象をリセット
             lockedEnemy = null;
         }
 
         // ロックオン範囲内からでた敵をリストから排除
-        enemies.Remove(collider.gameObject);
+        enemies.Remove(gameObject);
 
        
         if (enemies.Count != 0)
