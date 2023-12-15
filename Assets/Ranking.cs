@@ -34,7 +34,7 @@ public class Ranking
         }
     }
 
-    List<Ranker> rankers = new List<Ranker>();
+    public List<Ranker> rankers = new List<Ranker>();
 
     public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.score).ToList();
 
