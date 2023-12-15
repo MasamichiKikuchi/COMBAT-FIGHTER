@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject player; // プレイヤーのTransform
 
+
     public float followDistance = 5f;  // プレイヤーを追随する距離
     public float followSpeed = 5f;     // 追随速度
 

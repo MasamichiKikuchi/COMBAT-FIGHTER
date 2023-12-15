@@ -4925,7 +4925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 100
+  speed: 150
   maxDistance: 100
   particlePrefab: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   missileAudioSource: {fileID: 2858704364242114041}
