@@ -24,8 +24,6 @@ public class RankingManager : MonoBehaviour
             ranking.Add(ranker.score);
         }
 
-        ranking.Add(Result.Instance.totalScore);
-
         rankingDialog.ShowRanking();
 
         ranking.Remove();

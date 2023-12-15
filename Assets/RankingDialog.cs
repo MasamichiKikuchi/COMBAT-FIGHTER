@@ -30,10 +30,21 @@ public class RankingDialog : MonoBehaviour
     public void ShowRanking()
     {
         List<Ranking.Ranker> rankers = Ranking.GetInstance.Rankers;
-
-        for (int i = 0; i < buttonNumber-1; i++)
+        if (rankers.Count <= buttonNumber)
         {
-            rankingButtons[i].Ranker = rankers[i];
+            for (int i = 0; i < rankers.Count; i++)
+            {
+                rankingButtons[i].Ranker = rankers[i];
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < buttonNumber; i++)
+            {
+                rankingButtons[i].Ranker = rankers[i];
+            }
+
         }
     }
 }

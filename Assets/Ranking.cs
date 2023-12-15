@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class Ranking
 {
-    Ranking()
-    {
-    }
-
     static Ranking instance;
 
     public static Ranking GetInstance
@@ -36,7 +32,7 @@ public class Ranking
 
     public List<Ranker> rankers = new List<Ranker>();
 
-    //�����L���O�\���p���X�g
+    //ランキング表示用のリスト
     public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.score).ToList();
 
     public void Add(int score)
@@ -47,10 +43,10 @@ public class Ranking
 
     public void Remove()
     {
-        // score���傫�����Ƀ\�[�g
+        // scoreの大きい順に並び替え
         rankers = rankers.OrderByDescending(ranker => ranker.score).ToList();
         
-        // �傫������5�Ԗڈȉ��̗v�f���폜
+        // scoreが5番目より下の要素を削除
         if (rankers.Count > 5)
         {
             rankers.RemoveRange(5, rankers.Count - 5);
