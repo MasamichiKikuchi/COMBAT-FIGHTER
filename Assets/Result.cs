@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ResultManager : MonoBehaviour
+public class Result : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI lifeBonusText;
