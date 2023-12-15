@@ -10,10 +10,20 @@ public class ResultManager : MonoBehaviour
     public TextMeshProUGUI totalScoreText;
     public TextMeshProUGUI rankText;
     private int lifeBonus;
-    private int totalScore;
-    private string rank;
+    public int totalScore;
+    public string rank;
 
+    // シングルトンインスタンス
+    private static Result _instance;
 
+    // インスタンスにアクセスするプロパティ
+    public static Result Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +32,11 @@ public class ResultManager : MonoBehaviour
         ShowLifeBonus();
         ShowTotalScore(lifeBonus);
         ShowRank(totalScore);
-        Debug.Log($"{Player.Instance.hp}");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (_instance == null)
+        {
+            _instance = this;
+        }
     }
 
     void ShowResultScore()

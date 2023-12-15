@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        Debug.Log($"{Player.Instance.hp}");
+      
     }
    
 

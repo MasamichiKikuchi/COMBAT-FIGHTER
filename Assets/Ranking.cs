@@ -34,8 +34,9 @@ public class Ranking
         }
     }
 
-    List<Ranker> rankers = new List<Ranker>();
+    public List<Ranker> rankers = new List<Ranker>();
 
+    //�����L���O�\���p���X�g
     public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.score).ToList();
 
     public void Add(int score)
@@ -44,9 +45,17 @@ public class Ranking
         rankers.Add(ranker);
     }
 
-    public void Remove(string name)
+    public void Remove()
     {
-        //rankers.Remove(rankers.Find(score => score.name == name));
+        // score���傫�����Ƀ\�[�g
+        rankers = rankers.OrderByDescending(ranker => ranker.score).ToList();
+        
+        // �傫������5�Ԗڈȉ��̗v�f���폜
+        if (rankers.Count > 5)
+        {
+            rankers.RemoveRange(5, rankers.Count - 5);
+        }
+
     }
 
     public void Clear()

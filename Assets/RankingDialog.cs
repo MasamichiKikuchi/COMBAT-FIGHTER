@@ -31,7 +31,7 @@ public class RankingDialog : MonoBehaviour
     {
         List<Ranking.Ranker> rankers = Ranking.GetInstance.Rankers;
 
-        for (int i = 0; i < rankers.Count; i++)
+        for (int i = 0; i < buttonNumber; i++)
         {
             rankingButtons[i].Ranker = rankers[i];
         }
