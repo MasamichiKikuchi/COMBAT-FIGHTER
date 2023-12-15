@@ -26,9 +26,8 @@ public class Enemy : MonoBehaviour
     public float followSpeed = 5f;     // 追随速度
 
 
-    private bool isFlanking = false; // 回り込み中かどうかのフラグ
     public bool attacking = false;
-    private bool isFollowing = false;
+    
     public GameObject enemyMissilePrefab;
 
     public BoxCollider enemyAvoidArea; //プレイヤーを感知したら回避行動をとる範囲のボックスコライダーコンポーネント
