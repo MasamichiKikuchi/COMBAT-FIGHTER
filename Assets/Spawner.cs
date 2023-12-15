@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         {
             while (true)
             {
-                var distanceVector = new Vector3(100, 0, 0);
+                var distanceVector = new Vector3(0, 0, Random.Range(200, 500));
 
                 var spawnPositionFromPlayer = Quaternion.Euler(0, Random.Range(0, 360f), 0) * distanceVector;
 
@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 
-                yield return new WaitForSeconds(10);
+                yield return new WaitForSeconds(5);
 
                 if (player == null)
                 {

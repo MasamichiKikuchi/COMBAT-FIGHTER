@@ -28,7 +28,6 @@ public class Score
     public void AddScore(int score)
     {
         instance.playerScore += score;
-        Debug.Log($"ÉXÉRÉA{playerScore}");
     }
 
 }
