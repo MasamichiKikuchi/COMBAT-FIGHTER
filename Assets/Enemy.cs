@@ -14,14 +14,11 @@ public class Enemy : MonoBehaviour
     public float minZ = -500f;
     public float maxZ = 500f;
 
-
     public float chaseSpeed = 5f; // 基本の追跡速度
-    public float flankSpeed = 5f;       // 回り込み時の速度
+    
 
     private GameObject player; // プレイヤーのTransform
 
-    public float flankDistance = 5f; // 回り込む距離
-    public float moveSpeed = 5f; // 移動速度
     public float followDistance = 5f;  // プレイヤーを追随する距離
     public float followSpeed = 5f;     // 追随速度
 
@@ -72,9 +69,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         FollowPlayer();    
+        FollowPlayer();    
         
-        AttackMove();
        
         // 位置を制限
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
@@ -92,20 +88,6 @@ public class Enemy : MonoBehaviour
         enemyMissileController.SetTarget(collider);
     }
 
-
-    public void AttackMove()
-    {
-        /// プレイヤーの方向を向く
-        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * followSpeed);
-      
-        // プレイヤーの位置にオフセットを加えて滑らかに移動
-        float offsetDistance = 10f;
-        Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
-
-    }
     public void Damage(int damage)
     {
         hp -= damage;
