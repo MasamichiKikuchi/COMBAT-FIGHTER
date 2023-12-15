@@ -24,12 +24,12 @@ public class Spawner : MonoBehaviour
                 var spawnPositionFromPlayer = Quaternion.Euler(0, Random.Range(0, 360f), 0) * distanceVector;
 
                 var spawnPosition = player.transform.position + spawnPositionFromPlayer + distanceVector;
-
-                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 
                 yield return new WaitForSeconds(5);
 
-                if (player == null)
+                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+            if (player == null)
                 {
                     break;
                 }

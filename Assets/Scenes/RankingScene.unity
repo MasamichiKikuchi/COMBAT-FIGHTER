@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 171570420}
   - component: {fileID: 171570419}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 175548207}
   - component: {fileID: 175548210}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RankingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,10 +558,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1034398983}
-  - component: {fileID: 1034398984}
   - component: {fileID: 1034398985}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RankingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -582,18 +581,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1034398984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034398982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcd322e1264a594cb1751ebf2c1be1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1034398985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +804,7 @@ GameObject:
   - component: {fileID: 1506377756}
   - component: {fileID: 1506377759}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: RankingDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
