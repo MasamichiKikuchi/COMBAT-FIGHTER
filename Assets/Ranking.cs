@@ -36,6 +36,7 @@ public class Ranking
 
     public List<Ranker> rankers = new List<Ranker>();
 
+    //ランキング表示用リスト
     public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.score).ToList();
 
     public void Add(int score)
@@ -44,9 +45,17 @@ public class Ranking
         rankers.Add(ranker);
     }
 
-    public void Remove(string name)
+    public void Remove()
     {
-        //rankers.Remove(rankers.Find(score => score.name == name));
+        // scoreが大きい順にソート
+        rankers = rankers.OrderByDescending(ranker => ranker.score).ToList();
+        
+        // 大きい順で5番目以下の要素を削除
+        if (rankers.Count > 5)
+        {
+            rankers.RemoveRange(5, rankers.Count - 5);
+        }
+
     }
 
     public void Clear()

@@ -18,13 +18,6 @@ public class RankingManager : MonoBehaviour
         // データを読み込む
         Ranking rankingList = reader.Read<Ranking>("RankingList");
 
-        for (int i = 0; i < rankingList.rankers.Count; i++)
-        {
-            Debug.Log(rankingList.rankers[i].score);
-        }
-
-
-
         foreach (var ranker in rankingList.rankers)
         {
 
@@ -32,9 +25,11 @@ public class RankingManager : MonoBehaviour
         }
 
         ranking.Add(Result.Instance.totalScore);
-        
-        //保存先の確認
-        //Debug.Log("保存先:" + Application.persistentDataPath);
+
+        rankingDialog.ShowRanking();
+
+        ranking.Remove();
+
         // QuickSaveWriterのインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
         // データを書き込む
@@ -42,8 +37,6 @@ public class RankingManager : MonoBehaviour
 
         // 変更を反映
         writer.Commit();
-
-        rankingDialog.ShowRanking();
     }
 
     void Update()
@@ -60,12 +53,7 @@ public class RankingManager : MonoBehaviour
     {
         Ranking ranking = Ranking.GetInstance;
        
-        ranking.Add(75);
-        ranking.Add(88);
-        ranking.Add(20);
-
-
-        ranking.Add(10);
+        
 
         foreach (var ranker in ranking.Rankers)
         {
@@ -73,27 +61,4 @@ public class RankingManager : MonoBehaviour
         }
     }
 
-    public void PlayerSave(QuickSaveSettings set)
-    {
-        Debug.Log("保存先:" + Application.persistentDataPath);
-        // QuickSaveWriterのインスタンスを作成
-        QuickSaveWriter writer = QuickSaveWriter.Create("Ranking", set);
-        // データを書き込む
-        //writer.Write("RankingList",;
-       
-        // 変更を反映
-        writer.Commit();
-    }
-
-    public void PlayerLoad(QuickSaveSettings set)
-    {
-        // QuickSaveReaderのインスタンスを作成
-        QuickSaveReader reader = QuickSaveReader.Create("Player", set);
-        // データを読み込む
-        string name = reader.Read<string>("Name");
-        Vector3 position = reader.Read<Vector3>("Position");
-        int level = reader.Read<int>("Level");
-
-        Debug.Log("name:" + name + ", position:" + position + ",　level:" + level);
-    }
 }

@@ -32,7 +32,6 @@ public class Result : MonoBehaviour
         ShowLifeBonus();
         ShowTotalScore(lifeBonus);
         ShowRank(totalScore);
-        Debug.Log($"{Player.Instance.hp}");
 
         if (_instance == null)
         {
