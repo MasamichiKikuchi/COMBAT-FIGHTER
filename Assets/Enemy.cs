@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
@@ -14,14 +15,13 @@ public class Enemy : MonoBehaviour
     public float minZ = -500f;
     public float maxZ = 500f;
 
-    public float chaseSpeed = 5f; // 基本の追跡速度
+    public float chaseSpeed = 5f; // 基本速度
     
 
     private GameObject player; // プレイヤーのTransform
 
-
     public float followDistance = 5f;  // プレイヤーを追随する距離
-    public float followSpeed = 5f;     // 追随速度
+   
 
 
     public bool attacking = false;
@@ -34,9 +34,14 @@ public class Enemy : MonoBehaviour
     public float rotateSpeed = 0.01f;
     private MiniMap miniMap;
 
+    public float followSpeed = 5f;     // 追随速度
     public float tiltAmount = 20f;      // 傾きの量
     public float smoothDampTime = 0.1f; // 滑らかな動きを得るための時間
     private Vector3 currentVelocity;
+
+    
+    public float followSmoothDampTime = 0.1f; // 滑らかな動きを得るための時間
+    public float followRotateSpeed = 0.01f;
     public GameObject particlePrefab; // プレハブをアタッチするための変数
     public AudioSource damageAudioSource;
    
@@ -138,21 +143,38 @@ public class Enemy : MonoBehaviour
 
     void FollowPlayer()
     {
-        transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
         // プレイヤーの位置に向かって滑らかに移動
         float offsetDistance = 10f;
-        Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance; ;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothDampTime, followSpeed);
+        Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
+        if ((Vector3.Distance(transform.position, targetPosition) >= 20f))
+        {
 
-        // プレイヤーの方向を向く
-        Vector3 directionToPlayer = (targetPosition - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
+            transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothDampTime, chaseSpeed);
 
-        // 傾きを追加
-        float tiltZ = -directionToPlayer.x * tiltAmount;
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+            // プレイヤーの方向を向く
+            Vector3 directionToPlayer = (targetPosition - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
 
+            // 傾きを追加
+            float tiltZ = -directionToPlayer.x * tiltAmount;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+        }
+        if ((Vector3.Distance(transform.position, targetPosition) < 20f) )
+        {
+           
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, followSmoothDampTime, followSpeed);
+
+            // プレイヤーの方向を向く
+            Vector3 directionToPlayer = (targetPosition - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * followRotateSpeed);
+
+            // 傾きを追加
+            float tiltZ = -directionToPlayer.x * tiltAmount;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
+        }
     }
     //破壊時のコルーチン
     IEnumerator DestroyCoroutine()

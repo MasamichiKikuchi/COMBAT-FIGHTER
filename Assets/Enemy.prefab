@@ -500,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &430229487771686690
 Transform:
   m_ObjectHideFlags: 0
@@ -951,16 +951,18 @@ MonoBehaviour:
   maxY: 100
   minZ: -500
   maxZ: 500
-  chaseSpeed: 20
-  followDistance: 30
-  followSpeed: 40
+  chaseSpeed: 70
+  followDistance: 20
   attacking: 0
   enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
   enemyAvoidArea: {fileID: 430399645129237269}
   avoidanceSpeed: 20
-  rotateSpeed: 0.3
+  rotateSpeed: 0.4
+  followSpeed: 40
   tiltAmount: 20
-  smoothDampTime: 0.5
+  smoothDampTime: 0.8
+  followSmoothDampTime: 0.3
+  followRotateSpeed: 0.8
   particlePrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   damageAudioSource: {fileID: -8472971057123588514}
 --- !u!114 &4833922136532465313
