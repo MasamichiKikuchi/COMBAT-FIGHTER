@@ -12,25 +12,28 @@ public class FireController : MonoBehaviour
     public static GameObject lockedEnemy; // ロックオン対象の敵
     public static List<GameObject> enemies;
     public GameObject lockOnCursor;//ロックオンカーソル
+    public Menu menu;
 
     void Start()
     {
         enemies = new List<GameObject>();
-        
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (menu.isInputEnabled == true)
         {
-            Vector3 playerPosition = transform.position;
-            
-            FireMissile();  
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Vector3 playerPosition = transform.position;
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-           SwitchLockedEnemy();
+                FireMissile();
+            }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                SwitchLockedEnemy();
+            }
         }
        
     }
