@@ -90,10 +90,7 @@ public class Player : MonoBehaviour
         StartCoroutine(DamageEffectCoroutine());
         damageAudioSource.Play();
         
-
-        // 音の再生を開始
-            
-        Debug.Log($"プレイヤーのHP:{hp}");
+       
         if (hp <= 0) 
         {
             SceneManager.LoadScene("ResultScene");

@@ -88,7 +88,6 @@ public class Enemy : MonoBehaviour
 
     public void Attack(Collider collider)
     {
-        Debug.Log($"{gameObject.name}の攻撃");
         GameObject enemyMissile = Instantiate(enemyMissilePrefab, transform.position, transform.rotation);
         EnemyMissileController enemyMissileController = enemyMissile.GetComponent<EnemyMissileController>();
         enemyMissileController.SetTarget(collider);
@@ -101,15 +100,15 @@ public class Enemy : MonoBehaviour
         //自分が倒された時
         if (hp <= 0)
         {
-            //プレイヤーにロックオンされないようにタグ変更
-            gameObject.tag = "Untagged";
+            
             //効果音ON
             damageAudioSource.Play();
-            if (FireController.lockedEnemy == gameObject)
-            {
-                player.GetComponent<FireController>().RemoveEnemiesInLockOnRange(gameObject);
-            }
-           //ミニマップのリストから除去
+           
+             player.GetComponent<FireController>().RemoveEnemiesInLockOnRange(gameObject);
+           
+            //プレイヤーにロックオンされないようにタグ変更
+            gameObject.tag = "Untagged";
+            //ミニマップのリストから除去
             MiniMap.enemies.Remove(gameObject);
             //ミニマップのアイコンを除去
             miniMap.RemoveEnemyIcon(gameObject);
