@@ -10,6 +10,9 @@ public class GameTimeCountdown : MonoBehaviour
     private float currentTime; // 現在の経過時間
 
     public TextMeshProUGUI countdownText; // UIに表示するためのテキスト
+    public AudioSource audioSource;
+    public AudioClip countDownSE;
+
 
     void Start()
     {
@@ -22,7 +25,13 @@ public class GameTimeCountdown : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             UpdateUI();
+
+            if (currentTime <= 5f)
+            {
+                audioSource.PlayOneShot(countDownSE);
+            }
         }
+        
         else
         {
             SceneManager.LoadScene("ResultScene");
