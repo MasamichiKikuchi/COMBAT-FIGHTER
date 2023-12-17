@@ -121,24 +121,6 @@ public class Enemy : MonoBehaviour
         }  
     }
 
-    public Vector3 AvoidDirection()
-    {
-        // ƒ‰ƒ“ƒ_ƒ€‚È•ûŒü‚É‰ñ”ğs“®
-        Vector3 randomDirection = Random.insideUnitSphere;
-
-        return randomDirection;
-
-    }
-
-    public void AvoidMove(Collider collider, Vector3 vector3)
-    {
-
-        vector3.z = 0f; // Z²•ûŒü‚Ì•Ï‰»‚ğ–³‹
-
-        Quaternion targetRotation = Quaternion.LookRotation(vector3);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
-        transform.Translate(Vector3.forward * avoidanceSpeed * Time.deltaTime);
-    }
 
     void FollowPlayer()
     {
