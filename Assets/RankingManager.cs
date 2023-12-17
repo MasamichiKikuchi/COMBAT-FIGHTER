@@ -30,7 +30,7 @@ public class RankingManager : MonoBehaviour
         rankingDialog.ShowRanking();
 
         ranking.Remove();
-
+        //ranking.rankers.Clear();
         // QuickSaveWriterのインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
         // データを書き込む

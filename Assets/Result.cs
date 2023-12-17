@@ -61,23 +61,23 @@ public class Result : MonoBehaviour
 
     void ShowRank(int totalScore)
     {
-        if (totalScore >= 5000)
+        if (totalScore >= 4000)
         {
             rank = "S";
         }
-        else if (totalScore >= 4000)
+        else if (totalScore >= 3000)
         {
             rank = "A";
         }
-        else if (totalScore >= 3000)
+        else if (totalScore >= 2000)
         {
             rank = "B";
         }
-        else if (totalScore >= 2000)
+        else if (totalScore >= 1000)
         {
             rank = "C";
         }
-        else if (totalScore >= 1000)
+        else if (totalScore >= 500)
         {
             rank = "D";
         }

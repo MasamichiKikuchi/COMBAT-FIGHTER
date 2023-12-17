@@ -125,9 +125,9 @@ public class Enemy : MonoBehaviour
     void FollowPlayer()
     {
         // プレイヤーの位置に向かって滑らかに移動
-        float offsetDistance = 10f;
+        float offsetDistance = 20f;
         Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
-        if ((Vector3.Distance(transform.position, targetPosition) >= 20f))
+        if ((Vector3.Distance(transform.position, targetPosition) >= 10f))
         {
 
             transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
             float tiltZ = -directionToPlayer.x * tiltAmount;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
         }
-        if ((Vector3.Distance(transform.position, targetPosition) < 20f) )
+        if ((Vector3.Distance(transform.position, targetPosition) < 10f) )
         {
            
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, followSmoothDampTime, followSpeed);

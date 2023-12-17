@@ -60,25 +60,29 @@ public class Player : MonoBehaviour
             if (enemy.lockPlayer == true)
             {
                 lookOnArert.SetActive(true);
-                if (playingSound != true)
-                {
-                    playingSound = true;
-                    waningAudioSource.loop = true;
-                    waningAudioSource.Play();
-                }
-
+              
                 break;
-            }
-            else
-            { 
-                
-              waningAudioSource.Stop();
-              playingSound=false;
-            }
+            }     
             
         }
-      
-    }
+        
+       if (lookOnArert.activeSelf) // lookOnArertがアクティブであるかどうかを確認
+       {
+        if (!playingSound) // playingSoundがfalseの場合に実行
+        {
+            playingSound = true;
+            waningAudioSource.loop = true;
+            waningAudioSource.Play();
+        }
+       }
+        else
+        {
+         waningAudioSource.Stop();
+         playingSound = false;
+        }
+}
+
+    
    
 
     public void Damage(int damage) 

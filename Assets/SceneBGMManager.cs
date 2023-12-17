@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SceneBGMManager : MonoBehaviour
 {
-    public AudioClip sceneBGM;
+    public AudioSource sceneBGM;
+    
 
     void OnEnable()
     {
         // シーンがアクティブになったときにBGMを再生
-        AudioManager.instance.PlayBGM(sceneBGM);
+        AudioManager.instance.PlayBGM(sceneBGM.clip);
     }
 
     void OnDisable()

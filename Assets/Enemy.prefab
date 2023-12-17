@@ -883,18 +883,18 @@ MonoBehaviour:
   maxY: 100
   minZ: -500
   maxZ: 500
-  chaseSpeed: 70
+  chaseSpeed: 60
   followDistance: 20
   attacking: 0
   enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
   enemyAvoidArea: {fileID: 0}
   avoidanceSpeed: 20
-  rotateSpeed: 0.4
+  rotateSpeed: 0.5
   followSpeed: 40
   tiltAmount: 20
-  smoothDampTime: 0.8
-  followSmoothDampTime: 0.3
-  followRotateSpeed: 0.8
+  smoothDampTime: 0.6
+  followSmoothDampTime: 0.4
+  followRotateSpeed: 1
   particlePrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   damageAudioSource: {fileID: -8472971057123588514}
 --- !u!114 &4833922136532465313
