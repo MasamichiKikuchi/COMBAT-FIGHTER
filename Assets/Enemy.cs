@@ -124,13 +124,14 @@ public class Enemy : MonoBehaviour
 
     void FollowPlayer()
     {
-        // プレイヤーの位置に向かって滑らかに移動
+        
         float offsetDistance = 20f;
         Vector3 targetPosition = player.transform.position - player.transform.forward * offsetDistance;
         if ((Vector3.Distance(transform.position, targetPosition) >= 10f))
         {
 
             transform.Translate(Vector3.forward * chaseSpeed * Time.deltaTime);
+            // プレイヤーの位置に向かって滑らかに移動
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothDampTime, chaseSpeed);
 
             // プレイヤーの方向を向く
