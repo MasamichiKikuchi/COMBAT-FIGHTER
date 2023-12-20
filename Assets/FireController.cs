@@ -12,7 +12,7 @@ public class FireController : MonoBehaviour
     public static GameObject lockedEnemy; // ロックオン対象の敵
     public static List<GameObject> enemies;
     public GameObject lockOnCursor;//ロックオンカーソル
-    public Menu menu;
+    public GameMenu gamemenu;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
-        if (menu.isInputEnabled == true)
+        if (gamemenu.isInputEnabled == true)
         {
             if (Input.GetButtonDown("Fire1"))
             {
