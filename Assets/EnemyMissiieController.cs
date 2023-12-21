@@ -48,7 +48,7 @@ public class EnemyMissileController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Player>().Damage(1);
+            other.GetComponent<IDamageable>().Damage(1);
             StartCoroutine(DestroyCoroutine());
         }
         ;

@@ -61,7 +61,7 @@ public class MissileController : MonoBehaviour
     {
         if (other.CompareTag("Enemy")) 
         {
-            other.GetComponent<Enemy>().Damage(1);
+            other.GetComponent<IDamageable>().Damage(1);
             Destroy(gameObject);
         }
         else
