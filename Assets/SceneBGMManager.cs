@@ -5,7 +5,6 @@ public class SceneBGMManager : MonoBehaviour
 {
     public AudioSource sceneBGM;
     
-
     void OnEnable()
     {
         // シーンがアクティブになったときにBGMを再生

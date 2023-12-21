@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//キャラクターのステータスに関するクラス
 public class MobStatus : MonoBehaviour
 {
     //オブジェクトのlife
@@ -14,12 +15,6 @@ public class MobStatus : MonoBehaviour
     {
         //lifeの値を最大値に設定
         life = maxLife;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public virtual void Damage(int damage)

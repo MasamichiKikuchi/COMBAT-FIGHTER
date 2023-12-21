@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+//プレイヤーのステータスや演出に関するクラス
 public class Player : MobStatus,IDamageable
 {
     //ライフゲージのゲームオブジェクト
@@ -38,14 +38,15 @@ public class Player : MobStatus,IDamageable
             return _instance;
         }
     }
-    private void Awake()
-    {
-        //ライフ最大値を設定
-        maxLife = 10;
-    }
-
+    
+        
     void Start()
     {
+        //ライフを設定
+        maxLife = 10;
+        life = maxLife;
+
+
         if (_instance == null)
         {
             _instance = this;
@@ -60,11 +61,11 @@ public class Player : MobStatus,IDamageable
 
 
     void Update()
-    {    
-        var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
-
+    {
         lookOnArert.SetActive(false);
-          
+        
+        //プレイヤーへのロックオンフラグを持っている敵がいたら、ロックオンアラートを出す
+        var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
         foreach (var enemy in enemys)
         {
             if (enemy.lockPlayer == true)
@@ -75,10 +76,10 @@ public class Player : MobStatus,IDamageable
             }     
             
         }
-        
-       if (lookOnArert.activeSelf) // lookOnArertがアクティブであるかどうかを確認
+        //ロックオンアラートがONのとき、SEを流す
+       if (lookOnArert.activeSelf) 
        {
-        if (!playingSound) // playingSoundがfalseの場合に実行
+        if (!playingSound) 
         {
             playingSound = true;
             waningAudioSource.loop = true;
@@ -174,16 +175,11 @@ public class Player : MobStatus,IDamageable
 
     private IEnumerator DamageEffectCoroutine()
     {
-        // プレハブをインスタンス化してゲームオブジェクトに追加
+        //パーティクルを実行
         GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
         particleInstance.transform.parent = transform;
-        // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
-        
-        yield return new WaitForSeconds(2f);
-        
-        //パーティクル破壊
+        yield return new WaitForSeconds(2f); 
         Destroy(particleInstance);
 
     }    

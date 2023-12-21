@@ -826,6 +826,7 @@ GameObject:
   - component: {fileID: 1614057939709649826}
   - component: {fileID: 1441294376626995244}
   - component: {fileID: 4833922136532465313}
+  - component: {fileID: 3038870812494823345}
   - component: {fileID: 8932465504882806526}
   - component: {fileID: 420532590608611596}
   - component: {fileID: -8472971057123588514}
@@ -877,24 +878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ea2625b3202f84e89d1dc513bf9cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -500
-  maxX: 500
-  minY: 10
-  maxY: 300
-  minZ: -500
-  maxZ: 500
-  chaseSpeed: 60
-  followDistance: 20
-  attacking: 0
+  life: 0
+  maxLife: 0
   enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
-  enemyAvoidArea: {fileID: 0}
-  avoidanceSpeed: 20
-  rotateSpeed: 0.5
-  followSpeed: 40
-  tiltAmount: 20
-  smoothDampTime: 0.6
-  followSmoothDampTime: 0.4
-  followRotateSpeed: 1
   particlePrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   damageAudioSource: {fileID: -8472971057123588514}
 --- !u!114 &4833922136532465313
@@ -911,6 +897,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacking: 0
   enemyMissilePrefab: {fileID: 5196894622545899776, guid: a04b23ededbe1ab48aaa15bd01d0b52c, type: 3}
+--- !u!114 &3038870812494823345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404388441596196507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fc926d08f9f154aad4b011de5a0c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -500
+  maxX: 500
+  minY: 1
+  maxY: 100
+  minZ: -500
+  maxZ: 500
+  followDistance: 5
+  Speed: 60
+  rotateSpeed: 0.5
+  tiltAmount: 60
+  smoothDampTime: 0.6
+  followSpeed: 40
+  followSmoothDampTime: 0.4
+  followRotateSpeed: 1
 --- !u!54 &8932465504882806526
 Rigidbody:
   m_ObjectHideFlags: 0
