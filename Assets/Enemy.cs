@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageable
 {
     //移動可能範囲の設定
     public float minX = -500f;
@@ -45,18 +45,6 @@ public class Enemy : MonoBehaviour
     public GameObject particlePrefab; // プレハブをアタッチするための変数
     public AudioSource damageAudioSource;
    
-    protected enum StateEnum
-    {
-        Normal,
-        Attacking,
-        Avoid,
-    }
-
-    bool isAttacking => StateEnum.Attacking == state;
-    bool Avoid => StateEnum.Avoid == state;
-
-    protected StateEnum state = StateEnum.Normal;
-
     int hp;
     int maxHp = 1;
 
