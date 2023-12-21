@@ -6,24 +6,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour,IDamageable
+public class Player : MobStatus,IDamageable
 {
-    public int hp;
-    int maxHp = 10;
+    //ライフゲージのゲームオブジェクト
     public GameObject lifeGauge;
+    //ロックオン警告演出のゲームオブジェクト
     public GameObject lookOnArert;
+    //撃墜演出のゲームオブジェクト
     public GameObject shootingDownDirection;
+    //UIを表示するパネル
     public GameObject uiPanel;
+    //ダメージ演出用のパネル
     public GameObject damagePanel;
+    //コルーチン中のフラグ
     bool coroutine = false;
-
+    //ダメージを受けた時用のパーティクルプレハブ
     public GameObject particlePrefab;
-
-   
+   　//ダメージを受けたときのSE
     public AudioSource damageAudioSource;
+    //ロックオンを受けている時のSE
     public AudioSource waningAudioSource;
-
+    //サウンドを鳴らしている時のフラグ
     bool playingSound = false;
+    //プレイヤーのインスタンス
     private static Player _instance;
 
     public static Player Instance
@@ -33,6 +38,11 @@ public class Player : MonoBehaviour,IDamageable
             return _instance;
         }
     }
+    private void Awake()
+    {
+        //ライフ最大値を設定
+        maxLife = 10;
+    }
 
     void Start()
     {
@@ -41,7 +51,7 @@ public class Player : MonoBehaviour,IDamageable
             _instance = this;
         }
 
-        hp = maxHp;
+       
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
@@ -85,17 +95,20 @@ public class Player : MonoBehaviour,IDamageable
     
    
 
-    public void Damage(int damage) 
+    public override void Damage(int damage) 
     {
-        hp -= damage;
-        lifeGauge.GetComponent<Image>().fillAmount = (hp * 1.0f) / maxHp;
+        base.Damage(damage);
+        //ライフゲージの表示を減らす
+        lifeGauge.GetComponent<Image>().fillAmount = (life * 1.0f) / maxLife;
+        //UIパネルを揺らす
         uiPanel.GetComponent<UIVibration>().StartUIVibration();
+        //
         StartCoroutine(DamagePanelCoroutine());
         StartCoroutine(DamageEffectCoroutine());
         damageAudioSource.Play();
         
        
-        if (hp <= 0) 
+        if (life <= 0) 
         {
             SceneManager.LoadScene("ResultScene");
             
@@ -104,8 +117,7 @@ public class Player : MonoBehaviour,IDamageable
 
     private void OnTriggerStay(Collider other)
     {        
-      Waning();
-        
+      Waning();      
     }
    
 
@@ -113,42 +125,50 @@ public class Player : MonoBehaviour,IDamageable
     {
         if (other.tag == "EnemyAttackArea")
         {
-           lookOnArert.SetActive(false);
-          
+
+           lookOnArert.SetActive(false);          
         }
     }
     public void Waning()
     {  
+       //ロックオン警告音演出をON
        lookOnArert.SetActive(true);
-
-       
-
+  
     }
 
-    public void ShootingDown()
+    public void ShowShootingDownDirection()
     {
+        //コルーチンフラグがOFFなら
         if (coroutine != true)
         {
+            //撃墜演出のコルーチンON
             StartCoroutine(ShootingDownDirectionCoroutine());
         }
     }
 
     private IEnumerator ShootingDownDirectionCoroutine()
     {
+        //コルーチン中フラグをON
         coroutine = true;
-
+        //撃墜演出をON
         shootingDownDirection.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        shootingDownDirection.SetActive(false);
 
+        yield return new WaitForSeconds(0.5f);
+        //撃墜演出をOFF
+        shootingDownDirection.SetActive(false);
+        //コルーチンフラグをOFF
         coroutine = false;
 
     }
 
     private IEnumerator DamagePanelCoroutine() 
     {
+        //ダメージパネルを表示
         damagePanel.SetActive(true);
+
         yield return new WaitForSeconds(0.5f);
+
+        //ダメージパネルを非表示
         damagePanel.SetActive(false);
     }
 
@@ -160,7 +180,10 @@ public class Player : MonoBehaviour,IDamageable
         particleInstance.transform.parent = transform;
         // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
+        
         yield return new WaitForSeconds(2f);
+        
+        //パーティクル破壊
         Destroy(particleInstance);
 
     }    

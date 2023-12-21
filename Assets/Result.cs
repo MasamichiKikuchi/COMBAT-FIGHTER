@@ -46,7 +46,7 @@ public class Result : MonoBehaviour
 
     int ShowLifeBonus()
     {
-       lifeBonus =   Player.Instance.hp * 200;
+       lifeBonus =   Player.Instance.life * 200;
        lifeBonusText.text =($"LIFE BONUS:{lifeBonus}");
        return (lifeBonus);
     }
