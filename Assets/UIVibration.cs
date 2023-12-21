@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//UIパネルを揺らすクラス
 public class UIVibration : MonoBehaviour
 {
     public RectTransform uiPanel; // UIのRectTransformを指定
@@ -11,8 +11,6 @@ public class UIVibration : MonoBehaviour
     public float vibrationIntensity = 10.0f; // 振動の強度
 
    
-  
-
     void Start()
     {
        uiPanelOriginalPosition= uiPanel.anchoredPosition;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+//敵の出現を管理するクラス
 public class Spawner : MonoBehaviour
 {
    
@@ -17,6 +17,7 @@ public class Spawner : MonoBehaviour
 
         private IEnumerator SpawnLoop()
         {
+        　　//一定時間ごとにプレイヤーの周囲のランダムな位置に敵を出現
             while (true)
             {
                 var distanceVector = new Vector3(0, 0, Random.Range(200, 500));

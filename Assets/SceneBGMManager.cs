@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//シーンごとのBGMを管理するクラス
 public class SceneBGMManager : MonoBehaviour
 {
     public AudioSource sceneBGM;

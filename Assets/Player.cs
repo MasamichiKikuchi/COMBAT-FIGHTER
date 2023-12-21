@@ -111,8 +111,7 @@ public class Player : MobStatus,IDamageable
        
         if (life <= 0) 
         {
-            SceneManager.LoadScene("ResultScene");
-            
+            SceneManager.LoadScene("ResultScene");      
         }
     }
 

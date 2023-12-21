@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//プレイヤーの撃墜スコアを管理するクラス
 public class Score
 {
+    // シングルトンインスタンス
     static Score instance;
 
     public int playerScore = 0;
 
-
+    // インスタンスにアクセスするプロパティ
     public static Score Instance
     {
         get

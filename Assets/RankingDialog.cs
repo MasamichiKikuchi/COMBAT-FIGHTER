@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ランキングを画面に表示させるためのクラス
 public class RankingDialog : MonoBehaviour
 {
-    [SerializeField]
-    int buttonNumber = 5;
+    private int buttonNumber = 5;
 
-    [SerializeField]
-    RankingButton rankingButton;
+    public RankingButton rankingButton;
 
-    RankingButton[] rankingButtons;
+    private RankingButton[] rankingButtons;
 
     private void Awake()
     {
+        //ランキング表示用のボタンをパネル上に作成
         CreateButton();
     }
 
@@ -29,6 +29,7 @@ public class RankingDialog : MonoBehaviour
 
     public void ShowRanking()
     {
+        //作成されたボタンにランカーの情報を入れ、表示する
         List<Ranking.Ranker> rankers = Ranking.GetInstance.Rankers;
         if (rankers.Count <= buttonNumber)
         {

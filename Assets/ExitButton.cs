@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+//ゲーム終了用のボタン
 public class ExitButton : MonoBehaviour
 {
    

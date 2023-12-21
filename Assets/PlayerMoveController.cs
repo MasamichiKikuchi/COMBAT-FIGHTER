@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+//プレイヤーの移動に関するクラス
 public class PlayerMoveController : MonoBehaviour
 {
     public float speed;

@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//敵のミサイルの動きを制御するクラス
 public class EnemyMissileController : MonoBehaviour
-{ 
-        public Transform target; // ロックオンした敵
-        public float speed = 100f; // ミサイルの速度
-
-        public float maxDistance = 100f; // 一定距離
-
+{
+    　　// ロックオンした敵
+    　　public Transform target;
+   　　 // ミサイルの速度
+   　　 public float speed = 100f;
+   　　 // 移動できる距離
+    　　public float maxDistance = 100f; 
+　　　　//初期位置用の変数
         private Vector3 initialPosition;
-
-        public GameObject particlePrefab; // パーティクルシステムのプレハブをアタッチするための変数
-
+   　　　// パーティクルシステムのプレハブをアタッチするための変数
+    　　public GameObject particlePrefab; 
 
         void Start()
         {
@@ -56,13 +57,10 @@ public class EnemyMissileController : MonoBehaviour
 
     IEnumerator DestroyCoroutine()
     {
-        // プレハブをインスタンス化してゲームオブジェクトに追加
+        // パーティクルを再生してから破壊
         GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
         particleInstance.transform.parent = transform;
-        // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
-
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
 
