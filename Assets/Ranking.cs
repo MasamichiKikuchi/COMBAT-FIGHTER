@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+//ランキングのデータを管理するクラス
 public class Ranking
 {
     static Ranking instance;
-
     public static Ranking GetInstance
     {
         get

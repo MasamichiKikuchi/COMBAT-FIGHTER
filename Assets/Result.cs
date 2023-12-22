@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+//リザルト画面の表示やデータに関するクラス
 public class Result : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
@@ -41,26 +41,29 @@ public class Result : MonoBehaviour
 
     void ShowResultScore()
     {
+        //プレイヤーの撃墜スコアを表示
         scoreText.text = ($"SCORE:{Score.Instance.playerScore}");
     }
 
     int ShowLifeBonus()
     {
-       lifeBonus =   Player.Instance.hp * 200;
+       //プレイヤーのライフに応じてボーナスを計算し、表示する
+       lifeBonus =   Player.Instance.life * 200;
        lifeBonusText.text =($"LIFE BONUS:{lifeBonus}");
        return (lifeBonus);
     }
 
     int ShowTotalScore(int lifeBonus)
-    { 
+    {
+        //撃墜スコアとライフボーナスを合算し、トータルスコアとする
         totalScore = Score.Instance.playerScore + lifeBonus;
         totalScoreText.text = ($"TOTAL SCORE:{totalScore}");
-        return (totalScore);
-    
+        return (totalScore);   
     }
 
     void ShowRank(int totalScore)
     {
+        //トータルスコアに応じてランク付け
         if (totalScore >= 4000)
         {
             rank = "S";

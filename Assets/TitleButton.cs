@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+//タイトルシーン移動用のボタン
 public class TitleButton : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,9 +17,4 @@ public class TitleButton : MonoBehaviour
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

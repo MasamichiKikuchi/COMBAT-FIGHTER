@@ -2179,9 +2179,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 055ec2bb6df211c46a02f5e9c9370d10, type: 3}
+  m_audioClip: {fileID: 8300000, guid: df9881834395e85468370ef4505219cf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2843,7 +2843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9588ebbd91f592446a336d8950d02ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  life: 0
+  maxLife: 0
   lifeGauge: {fileID: 1681489921}
   lookOnArert: {fileID: 360548804}
   shootingDownDirection: {fileID: 1343498627}

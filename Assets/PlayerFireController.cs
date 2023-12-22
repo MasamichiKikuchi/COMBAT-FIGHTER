@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class FireController : MonoBehaviour
+//プレイヤーの攻撃に関するクラス
+public class PlayerFireController : MonoBehaviour
 {
-    public GameObject missilePrefab;
 
-    public BoxCollider playerCollider; // プレイヤーのボックスコライダーコンポーネント
-    private GameObject[] enemiesInLockOnRange; // ロックオン範囲内の敵の配列
-    public static GameObject lockedEnemy; // ロックオン対象の敵
+    public GameObject missilePrefab;
+    // ロックオン範囲のボックスコライダーコンポーネント
+    public BoxCollider playerCollider;
+    // ロックオン対象の敵
+    public static GameObject lockedEnemy; 
+    //ロックオン範囲にいる敵のリスト
     public static List<GameObject> enemies;
-    public GameObject lockOnCursor;//ロックオンカーソル
+    //ロックオンカーソル
+    public GameObject lockOnCursor;
+    //ゲームメニュー
     public GameMenu gamemenu;
 
     void Start()
@@ -21,17 +25,18 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
+        //ゲームメニューがONの間は操作できない
         if (gamemenu.isInputEnabled == true)
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Vector3 playerPosition = transform.position;
-
+                //ミサイル発射
                 FireMissile();
             }
 
             if (Input.GetButtonDown("Fire2"))
             {
+                //ロックオン対象切り替え
                 SwitchLockedEnemy();
             }
         }
@@ -46,6 +51,7 @@ public class FireController : MonoBehaviour
     {
         RemoveEnemiesInLockOnRange(other.gameObject);
     }
+   
     void FireMissile()
     {
         if (lockedEnemy != null)
@@ -57,6 +63,7 @@ public class FireController : MonoBehaviour
         }
         else
         {
+            //ロックオン対象なしでミサイル発射
             GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
         }
 

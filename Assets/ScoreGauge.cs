@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+//撃墜スコアを表示するクラス
 public class ScoreGauge : MonoBehaviour
 {
     public TextMeshProUGUI scoreGauge;
@@ -12,7 +12,6 @@ public class ScoreGauge : MonoBehaviour
     {
         scoreGauge = GetComponent<TextMeshProUGUI>();
     }
-
 
     void Update()
     {

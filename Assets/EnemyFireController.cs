@@ -11,7 +11,6 @@ public class EnemyFireController : MonoBehaviour
 
     public void Attack(Collider collider)
     {
-        Debug.Log($"{gameObject.name}ÇÃçUåÇ");
         GameObject enemyMissile = Instantiate(enemyMissilePrefab,transform.position,transform.rotation);
         EnemyMissileController enemyMissileController = enemyMissile.GetComponent<EnemyMissileController>();
         enemyMissileController.SetTarget(collider);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//タイトル画面を管理するクラス
 public class TitleMenu : MonoBehaviour
 {
     public GameObject manualPanel;

@@ -5,25 +5,30 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public class Player : MonoBehaviour,IDamageable
+//プレイヤーのステータスや演出に関するクラス
+public class Player : MobStatus,IDamageable
 {
-    public int hp;
-    int maxHp = 10;
+    //ライフゲージのゲームオブジェクト
     public GameObject lifeGauge;
+    //ロックオン警告演出のゲームオブジェクト
     public GameObject lookOnArert;
+    //撃墜演出のゲームオブジェクト
     public GameObject shootingDownDirection;
+    //UIを表示するパネル
     public GameObject uiPanel;
+    //ダメージ演出用のパネル
     public GameObject damagePanel;
+    //コルーチン中のフラグ
     bool coroutine = false;
-
+    //ダメージを受けた時用のパーティクルプレハブ
     public GameObject particlePrefab;
-
-   
+   　//ダメージを受けたときのSE
     public AudioSource damageAudioSource;
+    //ロックオンを受けている時のSE
     public AudioSource waningAudioSource;
-
+    //サウンドを鳴らしている時のフラグ
     bool playingSound = false;
+    //プレイヤーのインスタンス
     private static Player _instance;
 
     public static Player Instance
@@ -33,15 +38,21 @@ public class Player : MonoBehaviour,IDamageable
             return _instance;
         }
     }
-
+    
+        
     void Start()
     {
+        //ライフを設定
+        maxLife = 10;
+        life = maxLife;
+
+
         if (_instance == null)
         {
             _instance = this;
         }
 
-        hp = maxHp;
+       
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);
@@ -50,11 +61,11 @@ public class Player : MonoBehaviour,IDamageable
 
 
     void Update()
-    {    
-        var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
-
+    {
         lookOnArert.SetActive(false);
-          
+        
+        //プレイヤーへのロックオンフラグを持っている敵がいたら、ロックオンアラートを出す
+        var enemys = FindObjectsByType<EnemyAttackArea>(FindObjectsSortMode.None);
         foreach (var enemy in enemys)
         {
             if (enemy.lockPlayer == true)
@@ -65,10 +76,10 @@ public class Player : MonoBehaviour,IDamageable
             }     
             
         }
-        
-       if (lookOnArert.activeSelf) // lookOnArertがアクティブであるかどうかを確認
+        //ロックオンアラートがONのとき、SEを流す
+       if (lookOnArert.activeSelf) 
        {
-        if (!playingSound) // playingSoundがfalseの場合に実行
+        if (!playingSound) 
         {
             playingSound = true;
             waningAudioSource.loop = true;
@@ -85,27 +96,28 @@ public class Player : MonoBehaviour,IDamageable
     
    
 
-    public void Damage(int damage) 
+    public override void Damage(int damage) 
     {
-        hp -= damage;
-        lifeGauge.GetComponent<Image>().fillAmount = (hp * 1.0f) / maxHp;
+        base.Damage(damage);
+        //ライフゲージの表示を減らす
+        lifeGauge.GetComponent<Image>().fillAmount = (life * 1.0f) / maxLife;
+        //UIパネルを揺らす
         uiPanel.GetComponent<UIVibration>().StartUIVibration();
+        //
         StartCoroutine(DamagePanelCoroutine());
         StartCoroutine(DamageEffectCoroutine());
         damageAudioSource.Play();
         
        
-        if (hp <= 0) 
+        if (life <= 0) 
         {
-            SceneManager.LoadScene("ResultScene");
-            
+            SceneManager.LoadScene("ResultScene");      
         }
     }
 
     private void OnTriggerStay(Collider other)
     {        
-      Waning();
-        
+      Waning();      
     }
    
 
@@ -113,54 +125,60 @@ public class Player : MonoBehaviour,IDamageable
     {
         if (other.tag == "EnemyAttackArea")
         {
-           lookOnArert.SetActive(false);
-          
+
+           lookOnArert.SetActive(false);          
         }
     }
     public void Waning()
     {  
+       //ロックオン警告音演出をON
        lookOnArert.SetActive(true);
-
-       
-
+  
     }
 
-    public void ShootingDown()
+    public void ShowShootingDownDirection()
     {
+        //コルーチンフラグがOFFなら
         if (coroutine != true)
         {
+            //撃墜演出のコルーチンON
             StartCoroutine(ShootingDownDirectionCoroutine());
         }
     }
 
     private IEnumerator ShootingDownDirectionCoroutine()
     {
+        //コルーチン中フラグをON
         coroutine = true;
-
+        //撃墜演出をON
         shootingDownDirection.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        shootingDownDirection.SetActive(false);
 
+        yield return new WaitForSeconds(0.5f);
+        //撃墜演出をOFF
+        shootingDownDirection.SetActive(false);
+        //コルーチンフラグをOFF
         coroutine = false;
 
     }
 
     private IEnumerator DamagePanelCoroutine() 
     {
+        //ダメージパネルを表示
         damagePanel.SetActive(true);
+
         yield return new WaitForSeconds(0.5f);
+
+        //ダメージパネルを非表示
         damagePanel.SetActive(false);
     }
 
     private IEnumerator DamageEffectCoroutine()
     {
-        // プレハブをインスタンス化してゲームオブジェクトに追加
+        //パーティクルを実行
         GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        // 別のゲームオブジェクトにアタッチする場合は、それに合わせて操作してください
         particleInstance.transform.parent = transform;
-        // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f); 
         Destroy(particleInstance);
 
     }    

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+//ランキング表示用のボタンのクラス
 public class RankingButton : MonoBehaviour
-{
-    [SerializeField]
-    TextMeshProUGUI scoreText;
+{    
+    public TextMeshProUGUI scoreText;
 
     Ranking.Ranker ranker;
 

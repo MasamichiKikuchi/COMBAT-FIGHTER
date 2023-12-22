@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using CI.QuickSave;  
 
+//ランキング画面の動きやデータをを管理するクラス
 public class RankingManager : MonoBehaviour
 {
-
-    [SerializeField]
-    RankingDialog rankingDialog;
+    //ランキング表示用のパネル
+    public RankingDialog rankingDialog;
 
     void Start()
     {
@@ -15,12 +15,11 @@ public class RankingManager : MonoBehaviour
 
         // QuickSaveReaderのインスタンスを作成
         QuickSaveReader reader = QuickSaveReader.Create("Ranking");
-        // データを読み込む
+        // セーブされているデータを読み込む
         Ranking rankingList = reader.Read<Ranking>("RankingList");
-
+   
         foreach (var ranker in rankingList.rankers)
         {
-
             ranking.Add(ranker.score);
         }
 
@@ -30,36 +29,15 @@ public class RankingManager : MonoBehaviour
         rankingDialog.ShowRanking();
 
         ranking.Remove();
-        //ranking.rankers.Clear();
+
+        ranking.rankers.Clear();
+       
         // QuickSaveWriterのインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
         // データを書き込む
         writer.Write("RankingList", ranking);
-
         // 変更を反映
         writer.Commit();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UpdateRanking();
-
-            rankingDialog.ShowRanking();
-        }
-    }
-
-    private void UpdateRanking()
-    {
-        Ranking ranking = Ranking.GetInstance;
-       
-        
-
-        foreach (var ranker in ranking.Rankers)
-        {
-            Debug.Log($"ポイント：{ranker.score}");
-        }
     }
 
 }

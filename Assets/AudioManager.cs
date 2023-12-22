@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//BGM再生用のクラス
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
@@ -19,7 +19,6 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             instance = this;
 
-        // AudioSourceを取得または追加
         bgmAudioSource = GetComponent<AudioSource>();
         if (bgmAudioSource == null)
         {
@@ -28,17 +27,16 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    // 他のBGMの制御メソッドなどを追加できます
     public void PlayBGM(AudioClip bgmClip)
     {
         if (bgmAudioSource != null && bgmClip != null)
         {
             bgmAudioSource.clip = bgmClip;
+            bgmAudioSource.loop = true;
             bgmAudioSource.Play();
         }
     }
 
-    // BGM停止メソッド
     public void StopBGM()
     {
         if (bgmAudioSource != null)
