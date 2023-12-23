@@ -30,7 +30,8 @@ public class RankingManager : MonoBehaviour
 
         ranking.Remove();
 
-        ranking.rankers.Clear();
+        //ランキングデータ全消去
+        //ranking.rankers.Clear();
        
         // QuickSaveWriterのインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
