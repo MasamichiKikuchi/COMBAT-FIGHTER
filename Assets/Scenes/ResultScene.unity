@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 144528256}
   - component: {fileID: 144528255}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +177,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next
+  m_text: 'Title
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -905,7 +907,7 @@ GameObject:
   - component: {fileID: 947462438}
   - component: {fileID: 947462441}
   m_Layer: 5
-  m_Name: RankingSceneButton
+  m_Name: TitleSceneButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1022,7 +1024,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 947462436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e4cf085a9234748ba2255824749442, type: 3}
+  m_Script: {fileID: 11500000, guid: 157c29df133b81b488e7be3753eecac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1101803047
