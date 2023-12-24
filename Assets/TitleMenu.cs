@@ -14,6 +14,8 @@ public class TitleMenu : MonoBehaviour
         manualPanel.SetActive(false);
         manualButton.onClick.AddListener(ShowManual);
         closeManualButton.onClick.AddListener(CloseManual);
+        //プレイヤーのスコアをリセット
+        Score.Instance.playerScore = 0;
     }
 
     private void ShowManual()
