@@ -4437,7 +4437,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2073049073}
   - component: {fileID: 2073049072}
-  - component: {fileID: 2073049071}
   - component: {fileID: 2073049070}
   m_Layer: 0
   m_Name: MiniMapCamera
@@ -4460,14 +4459,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1445146900}
   heightAbovePlayer: 200
---- !u!81 &2073049071
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073049069}
-  m_Enabled: 0
 --- !u!20 &2073049072
 Camera:
   m_ObjectHideFlags: 0
@@ -4631,7 +4622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5c1bbdee4162646bb8d2695aaf7d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 100
+  totalTime: 90
   countdownText: {fileID: 2105334534}
   audioSource: {fileID: 2105334536}
   countDownSE: {fileID: 8300000, guid: 4217d89ba66038f4d8e36770e7e78708, type: 3}

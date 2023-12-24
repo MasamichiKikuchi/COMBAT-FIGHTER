@@ -23,6 +23,8 @@ public class MiniMap : MonoBehaviour
 
     private Quaternion objectRotation;
 
+    Texture2D texture2D;
+
     private void Awake()
     {
         renderTexture = new RenderTexture(miniMapCamera.pixelWidth, miniMapCamera.pixelHeight, 24);
@@ -32,16 +34,17 @@ public class MiniMap : MonoBehaviour
     void Start()
     {   
         miniMapCamera.targetTexture = renderTexture;
-        playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();   
+        playerIcon = Instantiate(playerIconPrefab, transform).GetComponent<Image>();
+        texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
     }
 
     void Update()
     {
-        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
+        
         RenderTexture.active = renderTexture;
         texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture2D.Apply();
-        RenderTexture.active = null;
+        //RenderTexture.active = null;
 
         miniMapImage.texture = texture2D;
 

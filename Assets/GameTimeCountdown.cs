@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameTimeCountdown : MonoBehaviour
 {
-    public float totalTime = 100f; // ゲームの総時間（秒）
+    public float totalTime = 90f; // ゲームの総時間（秒）
     private float currentTime; // 現在の経過時間
 
     public TextMeshProUGUI countdownText; // UIに表示するためのテキスト
