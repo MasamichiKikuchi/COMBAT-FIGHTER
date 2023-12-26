@@ -11,6 +11,9 @@ public class TitleMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //プレイヤーのスコアをリセット
+        Score.Instance.playerScore = 0;
+
         manualPanel.SetActive(false);
         manualButton.onClick.AddListener(ShowManual);
         closeManualButton.onClick.AddListener(CloseManual);

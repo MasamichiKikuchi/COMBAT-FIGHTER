@@ -48,7 +48,7 @@ public class Result : MonoBehaviour
     int ShowLifeBonus()
     {
        //プレイヤーのライフに応じてボーナスを計算し、表示する
-       lifeBonus =   Player.Instance.life * 200;
+       lifeBonus =   Player.Instance.life * 100;
        lifeBonusText.text =($"LIFE BONUS:{lifeBonus}");
        return (lifeBonus);
     }
@@ -64,15 +64,15 @@ public class Result : MonoBehaviour
     void ShowRank(int totalScore)
     {
         //トータルスコアに応じてランク付け
-        if (totalScore >= 4000)
+        if (totalScore >= 2500)
         {
             rank = "S";
         }
-        else if (totalScore >= 3000)
+        else if (totalScore >= 2000)
         {
             rank = "A";
         }
-        else if (totalScore >= 2000)
+        else if (totalScore >= 1500)
         {
             rank = "B";
         }
