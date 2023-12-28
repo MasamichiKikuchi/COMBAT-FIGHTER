@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 //プレイヤーの移動に関するクラス
-public class PlayerMoveController : MonoBehaviour
+public class PlayerMoveController : MobMove
 {
     public float speed;
     private float currentSpeed;   // 現在の速度
@@ -12,14 +13,7 @@ public class PlayerMoveController : MonoBehaviour
     public float horizontalInput;
     public int currentAltitude;
 
-    //移動可能範囲の設定
-    public float minX = -500f;
-    public float maxX = 500f;
-    public float minY = 1f;
-    public float maxY = 100f;
-    public float minZ = -500f;
-    public float maxZ = 500f;
-
+   
     public TextMeshProUGUI speedMeter;
     public TextMeshProUGUI altiMeter;
 
@@ -43,6 +37,9 @@ public class PlayerMoveController : MonoBehaviour
         speedMeter.text = $"SPEED:{currentSpeed}";
         currentAltitude = (int)gameObject.transform.position.y;
         altiMeter.text = $"ALT:{currentAltitude}";
+
+        //移動範囲の制限
+        MovementRestrictions();
     }
 
     void AdjustSpeed(float scrollInput)
@@ -82,12 +79,6 @@ public class PlayerMoveController : MonoBehaviour
         {
             transform.Rotate(Vector3.up, 1 * rotationSpeed * Time.deltaTime);
         }
-
-        // 位置を制限
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
-        float clampedZ = Mathf.Clamp(transform.position.z, minZ, maxZ);
-        transform.position = new Vector3(clampedX, clampedY, clampedZ);
 
     }
 }
