@@ -8,6 +8,10 @@ public class SceneBGMManager : MonoBehaviour
     
     void OnEnable()
     {
+        if (AudioManager.instance == null)
+        {
+            AudioManager.instance = new AudioManager();       
+        }
         // シーンがアクティブになったときにBGMを再生
         AudioManager.instance.PlayBGM(sceneBGM.clip);
     }

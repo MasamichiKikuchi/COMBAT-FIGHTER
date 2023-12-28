@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+//ゲームシーンに移動するボタン
 public class GameSceneButton : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
        var button = GetComponent<Button>();
@@ -17,9 +16,4 @@ public class GameSceneButton : MonoBehaviour
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

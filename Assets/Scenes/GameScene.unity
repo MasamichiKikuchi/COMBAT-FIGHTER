@@ -597,8 +597,8 @@ MonoBehaviour:
   miniMapCamera: {fileID: 2073049072}
   miniMapImage: {fileID: 229647254}
   playerIconPrefab: {fileID: 5302017481834810641, guid: 04ec433cfa6b65448a768a910d424787, type: 3}
-  enemyIconPrefab: {fileID: 3300733530890872570, guid: 3a76da01c5bfd4448a8033bebf307afa, type: 3}
   playerTransform: {fileID: 1445146900}
+  enemyIconPrefab: {fileID: 3300733530890872570, guid: 3a76da01c5bfd4448a8033bebf307afa, type: 3}
   enemyIconsParent: {fileID: 670708391}
   miniMapRect: {fileID: 229647252}
 --- !u!114 &229647254
@@ -2833,7 +2833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123dea5b258daa940a5af26d6e5f382a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingDownDirection: {fileID: 1343498629}
 --- !u!1 &1363243941
 GameObject:
   m_ObjectHideFlags: 0

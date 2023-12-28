@@ -5,7 +5,9 @@ using UnityEngine;
 //ランキングのデータを管理するクラス
 public class Ranking
 {
+    //ランキングのシングルトンインスタンス
     static Ranking instance;
+
     public static Ranking GetInstance
     {
         get
@@ -18,24 +20,26 @@ public class Ranking
         }
     }
 
+    //各ランカーのスコアをもつインナークラス
     public class Ranker
-    {
-        
-        public int score;
+    {      
+    　  public int totalScore;
 
         public Ranker(int score)
         {
-            this.score = score;
+            this.totalScore = score;
         }
     }
 
+    //プレイヤーのリスト
     public List<Ranker> rankers = new List<Ranker>();
 
-    //ランキング表示用のリスト
-    public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.score).ToList();
+    //ランキングを上位から表示するリスト
+    public List<Ranker> Rankers => rankers.OrderByDescending(ranker => ranker.totalScore).ToList();
 
     public void Add(int score)
     {
+        //プレイヤーのリストに追加
         Ranker ranker = new Ranker(score);
         rankers.Add(ranker);
     }
@@ -43,7 +47,7 @@ public class Ranking
     public void Remove()
     {
         // scoreの大きい順に並び替え
-        rankers = rankers.OrderByDescending(ranker => ranker.score).ToList();
+        rankers = rankers.OrderByDescending(ranker => ranker.totalScore).ToList();
         
         // scoreが5番目より下の要素を削除
         if (rankers.Count > 5)
@@ -55,6 +59,7 @@ public class Ranking
 
     public void Clear()
     {
+        //プレイヤーのリストを全削除
         rankers.Clear();
     }
 }

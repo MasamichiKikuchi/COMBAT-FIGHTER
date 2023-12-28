@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//ミニマップ用のカメラのクラス
 public class MiniMapCameraFollow : MonoBehaviour
 {
+    //プレイヤーの位置
     public Transform playerTransform;
+    //カメラの高さ
     public float heightAbovePlayer = 100f;
-
-   
 
     void Update()
     {

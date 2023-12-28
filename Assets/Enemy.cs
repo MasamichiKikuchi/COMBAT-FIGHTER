@@ -13,7 +13,7 @@ public class Enemy : MobStatus,IDamageable
     public GameObject enemyMissilePrefab;
   　 //ミニマップ
     private MiniMap miniMap;
-　　//撃墜時のパーティクル　
+　　//撃墜時のパーティクルプレハブ　
     public GameObject particlePrefab; 
     //被弾時のSE
     public AudioSource damageAudioSource;
@@ -73,11 +73,9 @@ public class Enemy : MobStatus,IDamageable
     //破壊時のコルーチン
     IEnumerator DestroyCoroutine()
     {
-        // パーティクルプレハブを作り、ゲームオブジェクトに追加
+        // パーティクルプレハブを作り、再生
         GameObject particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         particleInstance.transform.parent = transform;
-       
-        // パーティクル再生
         particleInstance.GetComponent<ParticleSystem>().Play();
           
       　yield return new WaitForSeconds(0.5f);

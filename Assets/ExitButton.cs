@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //ゲーム終了用のボタン
 public class ExitButton : MonoBehaviour
-{
-   
+{  
     void Start()
     {
         var button = GetComponent<Button>();

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 //ランキング表示用のボタンのクラス
 public class RankingButton : MonoBehaviour
 {    
+    //スコアを表示するテキスト
     public TextMeshProUGUI scoreText;
-
+    //ランキングクラスのランカー
     Ranking.Ranker ranker;
 
     public Ranking.Ranker Ranker
@@ -18,8 +19,9 @@ public class RankingButton : MonoBehaviour
         }
         set
         {
+            //ランカーのスコアを表示
             ranker = value;
-            scoreText.text = ranker.score.ToString();
+            scoreText.text = ranker.totalScore.ToString();
         }
     }
 }

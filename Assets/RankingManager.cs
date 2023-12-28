@@ -11,29 +11,33 @@ public class RankingManager : MonoBehaviour
 
     void Start()
     {
+        //ランキングのシングルトンインスタンスを取得
         Ranking ranking = Ranking.GetInstance;
 
-        // QuickSaveReaderのインスタンスを作成
+        // QuickSaveReader(データセーブのアセット)のインスタンスを作成
         QuickSaveReader reader = QuickSaveReader.Create("Ranking");
         // セーブされているデータを読み込む
         Ranking rankingList = reader.Read<Ranking>("RankingList");
    
         foreach (var ranker in rankingList.rankers)
         {
-            ranking.Add(ranker.score);
+       　　 //アセットにセーブされてたランカーをランキングリストに入れる
+            ranking.Add(ranker.totalScore);
         }
 
-        //今回のスコア
-        ranking.Add(Result.Instance.totalScore);
+        //今回のプレイヤースコア
+        ranking.Add(Score.Instance.totalScore);
 
+        //画面にランキング表示
         rankingDialog.ShowRanking();
 
+        //ランキング5位以下のデータをランキングから削除
         ranking.Remove();
 
         //ランキングデータ全消去
-        ranking.rankers.Clear();
+        //ranking.rankers.Clear();
        
-        // QuickSaveWriterのインスタンスを作成
+        // QuickSaveWriter(データセーブのアセット)のインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
         // データを書き込む
         writer.Write("RankingList", ranking);

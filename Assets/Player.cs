@@ -29,30 +29,33 @@ public class Player : MobStatus,IDamageable
     //サウンドを鳴らしている時のフラグ
     bool playingSound = false;
     //プレイヤーのインスタンス
-    private static Player _instance;
+    private static Player instance;
 
     public static Player Instance
     {
         get
         {
-            return _instance;
+            if (instance == null)
+            {
+                instance = new Player();
+            }
+
+            return instance;
         }
     }
-    
-        
+
+    private Player()
+    {
+        life = 10;
+    }
+
+
     void Start()
     {
         //ライフを設定
         maxLife = 10;
         life = maxLife;
-
-
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-
-       
+     
         damagePanel.SetActive(false);
         lookOnArert.SetActive(false);  
         shootingDownDirection.SetActive(false);

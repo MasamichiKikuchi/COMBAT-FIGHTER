@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//ゲームの制限時間を管理するクラス
 public class GameTimeCountdown : MonoBehaviour
 {
-    public float totalTime = 90f; // ゲームの総時間（秒）
-    private float currentTime; // 現在の経過時間
-
-    public TextMeshProUGUI countdownText; // UIに表示するためのテキスト
+    // ゲームの総時間（秒）
+    public float totalTime = 90f;
+    // 現在の経過時間
+    private float currentTime;
+    // UIに表示するためのテキスト
+    public TextMeshProUGUI countdownText; 
+    //制限時間が迫っているときの音
     public AudioSource audioSource;
     public AudioClip countDownSE;
 
@@ -24,27 +27,27 @@ public class GameTimeCountdown : MonoBehaviour
         if (currentTime > 0f)
         {
             currentTime -= Time.deltaTime;
+
+            // UIに残り時間を表示
             UpdateUI();
 
             if (currentTime <= 5f)
             {
+                //制限時間が少なくなったら音を鳴らす
                 audioSource.PlayOneShot(countDownSE);
             }
         }
         
         else
         {
+            //制限時間が終了したらリザルト画面に移る
             SceneManager.LoadScene("ResultScene");
         }
     }
 
     void UpdateUI()
-    {
-        // UIに残り時間を表示
-        if (countdownText != null)
-        {
-            int seconds = Mathf.CeilToInt(currentTime);
-            countdownText.text = "Time: " + seconds.ToString() + "s";
-        }
+    {      
+    　int seconds = Mathf.CeilToInt(currentTime);
+      countdownText.text = "Time: " + seconds.ToString() + "s";
     }
 }
