@@ -34,15 +34,21 @@ public class RankingManager : MonoBehaviour
         //ランキング5位以下のデータをランキングから削除
         ranking.Remove();
 
-        //ランキングデータ全消去
+        //ランキングデータ全消去　※セーブされてたデータも全て消えるので注意
         //ranking.rankers.Clear();
-       
+
         // QuickSaveWriter(データセーブのアセット)のインスタンスを作成
         QuickSaveWriter writer = QuickSaveWriter.Create("Ranking");
         // データを書き込む
         writer.Write("RankingList", ranking);
         // 変更を反映
         writer.Commit();
+
+        //データが重複しないように保存済みのランキングデータをリセットする
+       ranking.rankers.Clear();
+
     }
+
+
 
 }
