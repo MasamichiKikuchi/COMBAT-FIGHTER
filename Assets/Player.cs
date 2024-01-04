@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -37,16 +38,16 @@ public class Player : MobStatus,IDamageable
         {
             if (instance == null)
             {
-                Debug.Log("プレイヤーが存在しません");
+                Debug.Log("プレイヤーのインスタンスが存在しません");
             }
-
             return instance;
         }
     }
 
     private Player()
     {
-        
+        //プレイヤーのインスタンスが無い場合、インスタンスを設定する
+        instance = this;
     }
 
 

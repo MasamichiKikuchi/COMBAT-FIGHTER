@@ -1058,8 +1058,6 @@ MonoBehaviour:
   lifeBonusText: {fileID: 399456861}
   totalScoreText: {fileID: 816051058}
   rankText: {fileID: 1281512902}
-  totalScore: 0
-  rank: 
 --- !u!4 &1101803049
 Transform:
   m_ObjectHideFlags: 0
