@@ -17,10 +17,8 @@ public class EnemyMissileController : MonoBehaviour
 
         void Start()
         {
-
             // ゲームオブジェクトの初期位置を保存
             initialPosition = transform.position;
-
         }
 
         void Update()

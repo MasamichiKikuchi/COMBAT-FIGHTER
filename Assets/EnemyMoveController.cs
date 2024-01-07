@@ -65,16 +65,13 @@ public class EnemyMoveController : MobMove
 
         //目標地点に近づいた場合　※動きはほぼ同じだが、設定値は別の値になっている
         if ((Vector3.Distance(transform.position, targetPosition) < 10f))
-        {
-            // プレイヤーの位置に向かって指定された時間とスピードで滑らかに移動　
+        {           
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, followSmoothDampTime, followSpeed);
 
-            //プレイヤーの方向を指定された速度で向く
             Vector3 directionToPlayer = (targetPosition - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * followRotateSpeed);
 
-            //プレイヤーの方向へ傾きを追加
             float tiltZ = -directionToPlayer.x * tiltAmount;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, tiltZ);
         }

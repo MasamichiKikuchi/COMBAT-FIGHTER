@@ -58,7 +58,7 @@ public class PlayerFireController : MonoBehaviour
         {
             // ミサイルの発射とロックオン対象の設定
             GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
-            MissileController missileController = missile.GetComponent<MissileController>();
+            PlayerMissileController missileController = missile.GetComponent<PlayerMissileController>();
             missileController.SetTarget(lockedEnemy);
         }
         else

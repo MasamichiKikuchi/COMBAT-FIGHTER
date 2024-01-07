@@ -4,19 +4,23 @@ using System.Diagnostics.Contracts;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MissileController : MonoBehaviour
+public class PlayerMissileController : MonoBehaviour
 {
-    public GameObject target; // ロックオンした敵
-    public float speed = 100f; // ミサイルの速度
-
-    public float maxDistance = 100f; // 一定距離
-
+    // ロックオンした敵
+    public GameObject target;
+    // ミサイルの速度
+    public float speed = 100f;
+    // 一定距離
+    public float maxDistance = 100f;
+    //初期位置用の変数
     private Vector3 initialPosition;
-
-    public GameObject particlePrefab; // パーティクルシステムのプレハブをアタッチするための変数
-
-    public AudioSource missileAudioSource;//発射の音声
-    public AudioSource missileDestroyAudioSource;//破壊時の音声
+    // パーティクルシステムのプレハブをアタッチするための変数
+    public GameObject particlePrefab;
+   
+    //発射の音声
+    public AudioSource missileAudioSource;
+    //破壊時の音声
+    public AudioSource missileDestroyAudioSource;
 
     private bool coroutine = false;
     void Start()
