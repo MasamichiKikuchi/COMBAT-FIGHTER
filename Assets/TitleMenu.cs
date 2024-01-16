@@ -17,6 +17,9 @@ public class TitleMenu : MonoBehaviour
         //プレイヤーのスコアをリセット
         Score.Instance.playerScore = 0;
 
+        //ゲームメニューからタイトルに戻った場合のために、ゲーム時間を元に戻す
+        Time.timeScale = 1;
+
         manualPanel.SetActive(false);
         manualButton.onClick.AddListener(ShowManual);
         closeManualButton.onClick.AddListener(CloseManual);
